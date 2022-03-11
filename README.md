@@ -16,6 +16,29 @@ The only condition to run that byte code is for the machine to have a runtime en
 ## Why is Java not a pure object oriented language?
 Java supports primitive data types - byte, boolean, char, short, int, float, long, and double and hence it is not a pure object-oriented language.
 
+## Solid principles of java
+
+In Java, SOLID principles are an object-oriented approach that are applied to software structure design. It is conceptualized by Robert C. Martin (also known as Uncle Bob). These five principles have changed the world of object-oriented programming, and also changed the way of writing software. It also ensures that the software is modular, easy to understand, debug, and refactor
+
+- **Single Responsibility Principle(SRP):** Each class should be responsible for a single part or functionality of the system.
+- **Open-Closed Principle(OCP):** Software components should be open for extension, but not for modification.
+- **Liskov Substitution Principle(LSP):** Objects of a superclass should be replaceable with objects of its subclasses without breaking the system.
+- **Interface Segregation Principle(ISP):** No client should be forced to depend on methods that it does not use.
+- **Dependency Inversion Principle(DIP):** High-level modules should not depend on low-level modules, both should depend on abstractions.
+
+## Why java does not support multiple inheritance
+
+1) Multiple inheritance is not supported because it leads to deadly diamond problem.
+2) In java, every class is a child of Object class. When it inherits from more than one super class, sub class gets the ambiguity to acquire the property of Object class.
+
+For example two class A,B having same method m1(). And class C extends both A, B.
+
+ class C extends A, B // for explaining purpose.
+
+Now, class C will search the definition of m1. First, it will search in class if it didn't find then it will check to parents class. Both A, B having the definition So here ambiguity occur which definition should choose. So java does not support multiple inheritance.
+
+Java supports multiple inheritance through interfaces only. A class can implement any number of interfaces but can extend only one class.
+
 ## What are the characteristics of Java 8? (SHORT)
 1) Lambda expressions
 2) Functional interfaces
@@ -756,6 +779,50 @@ ABC
 {1=first, 2=second}
 {1=first, 2=second}
 ```
+
+## Fail Fast And Fail Safe Iterators in Java
+
+Iterators in java are used to iterate over the Collection objects.
+
+**Fail-Fast**
+- Fail-Fast iterators immediately throw ConcurrentModificationException if there is a structural modification of the collection. 
+- Structural modification means adding, removing any element from collection while a thread is iterating over that collection. 
+- Iterator on ArrayList, HashMap classes are some examples of fail-fast Iterator.
+
+**Fail-Safe**
+- Fail-Safe iterators don’t throw any exceptions if a collection is structurally modified while iterating over it. 
+- This is because, they operate on the clone of the collection, not on the original collection and that’s why they are called fail-safe iterators. 
+- Iterator on CopyOnWriteArrayList, ConcurrentHashMap classes are examples of fail-safe Iterator.
+
+
+## Garbage collection
+
+- Garbage collection in Java is the process by which Java programs perform automatic memory management. 
+- Java programs compile to bytecode that can be run on a Java Virtual Machine. 
+- When Java programs run on the JVM, objects are created on the heap, which is a portion of memory dedicated to the program. 
+- Eventually, some objects will no longer be needed. The garbage collector finds these unused objects and deletes them to free up memory.
+- The main objective of Garbage Collector is to free heap memory by destroying unreachable objects. 
+- The garbage collector is the best example of the Daemon thread as it is always running in the background. 
+
+Important Concepts Related to Garbage Collection in Java
+- **Unreachable objects:** 
+
+  An object is said to be unreachable if it doesn’t contain any reference to it. Also, note that objects which are part of the island of isolation are also unreachable. 
+  
+```
+  Integer i = new Integer(4);
+// the new Integer object is reachable  via the reference in 'i' 
+i = null;
+// the Integer object is no longer reachable.
+```
+- **Using Runtime.getRuntime().gc() method:**
+  Runtime class allows the application to interface with the JVM in which the application is running. Hence by using its gc() method, we can request JVM to run Garbage Collector.
+
+ - **Finalization:** 
+Just before destroying an object, Garbage Collector calls finalize() method on the object to perform cleanup activities. Once finalize() method completes, Garbage Collector destroys that object.
+finalize() method is present in Object class with the following prototype.
+protected void finalize() throws Throwable
+
 
 # `Spring and Spring Boot Interview Questions`
 
