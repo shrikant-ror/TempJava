@@ -180,13 +180,69 @@ The reduce method is used to reduce the elements of a stream to a single value. 
 List number = Arrays.asList(2,3,4,5);
 int even = number.stream().filter(x->x%2==0).reduce(0,(ans,i)-> ans+i);
 ```
-##Java Date Time API
-Under the package java.time, Java 8 offers a new date-time API.
+## Java Date Time API
+Java 8 introduced new APIs for Date and Time to address the shortcomings of the older java.util.Date and java.util.Calendar.
 
 Local: Simplified date-time API with no timezone management complexity.
 Zoned: specialized date-time API that can handle several time zones.
 
-##String:
+- Issues With the Existing Date/Time APIs
+1) **Thread safety** – The Date and Calendar classes are not thread safe, leaving developers to deal with the headache of hard-to-debug concurrency issues and to write additional code to handle thread safety. On the contrary, the new Date and Time APIs introduced in Java 8 are immutable and thread safe, thus taking that concurrency headache away from developers.
+2) **API design and ease of understanding** – The Date and Calendar APIs are poorly designed with inadequate methods to perform day-to-day operations. The new Date/Time API is ISO-centric and follows consistent domain models for date, time, duration and periods. There are a wide variety of utility methods that support the most common operations.
+3) **ZonedDate and Time** – Developers had to write additional logic to handle time-zone logic with the old APIs, whereas with the new APIs, handling of time zone can be done with Local and ZonedDate/Time APIs.
+
+#### Working With LocalDate
+
+The LocalDate represents a **date in ISO format (yyyy-MM-dd) without time**. An instance of current date can be created from the system clock:
+```
+LocalDate localDate = LocalDate.now();
+```
+And we can get the LocalDate representing a specific day, month and year by using the of method or the parse method.
+For example, these code snippets represent the LocalDate for February 20, 2015:
+```
+LocalDate.of(2015, 02, 20);
+LocalDate.parse("2015-02-20");
+```
+The following code snippet gets the current local date and adds one day:
+```
+LocalDate tomorrow = LocalDate.now().plusDays(1);
+```
+#### Working With LocalTime
+
+The LocalTime represents **time without a date**.
+```
+LocalTime now = LocalTime.now();
+```
+
+#### Working With LocalDateTime
+
+LocalDateTime is used to represent a **combination of date and time**. This is the most commonly used class when we need a combination of date and time.
+```
+LocalDateTime.now();
+```
+
+#### Using ZonedDateTime API
+
+Java 8 provides ZonedDateTime when we need to deal with **time-zone-specific date and time**. The ZoneId is an identifier used to represent different zones. There are about 40 different time zones, and the ZoneId represents them as follows.
+
+Here, we create a Zone for Paris:
+```
+ZoneId zoneId = ZoneId.of("Europe/Paris");
+```
+And we can get a set of all zone ids:
+```
+Set<String> allZoneIds = ZoneId.getAvailableZoneIds();
+```
+The LocalDateTime can be converted to a specific zone:
+```
+ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, zoneId);
+```
+The ZonedDateTime provides the parse method to get time-zone-specific date-time:
+```
+ZonedDateTime.parse("2015-05-03T10:15:30+01:00[Europe/Paris]");
+```
+
+## String:
 
 In Java, a String is represented internally by an array of byte values. strings are immutable to improve performance and security.
 
@@ -210,6 +266,7 @@ According to the JVM Specification, String literals are stored in a runtime cons
 - If not found, then the JVM adds it to the pool (interns it) and returns its reference
 
 ## What is the difference between equals() and == in Java?
+
 Equals() method is defined in Object class in Java and used for checking equality of two objects defined by business logic.
 
 “==” or equality operator in Java is a binary operator provided by Java programming language and used to compare primitives and objects. public boolean equals(Object o) is the method provided by the Object class. The default implementation uses == operator to compare two objects. For example: method can be overridden like String class. equals() method is used to compare the values of two objects.
@@ -218,13 +275,13 @@ Equals() method is defined in Object class in Java and used for checking equalit
 
 As we know that abstraction refers to hiding the internal implementation of the feature and only showing the functionality to the users. i.e. what it works (showing), how it works (hiding). Both abstract class and interface are used for abstraction, henceforth Interface and Abstract Class are required prerequisites
 
-1) Type of methods: 
+**1) Type of methods:** 
 Interface can have only abstract methods. An abstract class can have abstract and non-abstract methods. From Java 8, it can have default and static methods also.
-2) Final Variables: 
+**2) Final Variables:**
 Variables declared in a Java interface are by default final. An abstract class may contain non-final variables.
-3) Type of variables: 
+**3) Type of variables:** 
 Abstract class can have final, non-final, static and non-static variables. The interface has only static and final variables.
-4) Implementation: 
+**4) Implementation:**
 Abstract class can provide the implementation of the interface. Interface can’t provide the implementation of an abstract class.
 
 ## Inheritance vs Abstraction: 
@@ -234,15 +291,68 @@ An interface can extend another Java interface only, an abstract class can exten
 3) Accessibility of Data Members: 
 Members of a Java interface are public by default. A Java abstract class can have class members like private, protected, etc.
 
-What is the difference between Array list and vector in Java?
+## What is the difference between Array list and vector in Java?
+
+ArrayList and Vectors both implement the List interface, and both use (dynamically resizable) arrays for their internal data structure, much like using an ordinary array. 
+
+**ArrayList:** ``` ArrayList<T> al = new ArrayList<T>(); ```
+**Vector:** ``` Vector<T> v = new Vector<T>(); ```
+
+| Array list | vector |
+| ------ | ------ |
+| ArrayList is not synchronized. | Vector is synchronized. |
+| ArrayList increments 50% of the current array size if the number of elements exceeds ts capacity. | Vector increments 100% means doubles the array size if the total number of elements exceeds its capacity. |
+| ArrayList is not a legacy class. It is introduced in JDK 1.2. | Vector is a legacy class. |
+| ArrayList is fast because it is non-synchronized. | Vector is slow because it is synchronized, i.e., in a multithreading environment, it holds the other threads in a runnable or non-runnable state until the current thread releases the lock of the object. |
+| ArrayList uses the Iterator interface to traverse the elements. | A Vector can use the Iterator interface or Enumeration interface to traverse the elements. |
 
 
 What makes a HashSet different from a TreeSet?
 
+| Key | Hash Set | Tree Set |
+| ------ | ------ | ------ |
+| Implementation  | Hash set is implemented using HashTable  | The tree set is implemented using a tree structure.  |
+| Null Object  | HashSet allows a null object  | The tree set does not allow the null object. It throws the null pointer exception.  |
+| Methods  | Hash set use equals method to compare two objects  | Tree set use compare method for comparing two objects. |
+| Heterogeneous object  | Hash set doesn't now allow a heterogeneous object  | Tree set allows a heterogeneous object  |
+| Ordering  | HashSet does not maintain any order  |  TreeSet maintains an object in sorted order  |
+
 
 What are the differences between HashMap and HashTable in Java?
 
+| Hashmap | Hashtable |
+| ------ | ------ |
+| No method is synchronized. | Every method is synchronized. |
+| Multiple threads can operate simultaneously and hence hashmap’s object is not thread-safe. | At a time only one thread is allowed to operate the Hashtable’s object. Hence it is thread-safe. |
+| Threads are not required to wait and hence relatively performance is high. | It increases the waiting time of the thread and hence performance is low. |
+| Null is allowed for both key and value. | Null is not allowed for both key and value. Otherwise, we will get a null pointer exception. |
 
+```
+public static void main(String args[])
+    {
+        //----------hashtable -------------------------
+        Hashtable<Integer,String> ht=new Hashtable<Integer,String>();
+        ht.put(101," ajay");
+        ht.put(101,"Vijay");
+        ht.put(102,"Ravi");
+        ht.put(103,"Rahul");
+        System.out.println("-------------Hash table--------------");
+        for (Map.Entry m:ht.entrySet()) {
+            System.out.println(m.getKey()+" "+m.getValue());
+        }
+ 
+        //----------------hashmap--------------------------------
+        HashMap<Integer,String> hm=new HashMap<Integer,String>();
+        hm.put(100,"Amit");
+        hm.put(104,"Amit"); 
+        hm.put(101,"Vijay");
+        hm.put(102,"Rahul");
+        System.out.println("-----------Hash map-----------");
+        for (Map.Entry m:hm.entrySet()) {
+            System.out.println(m.getKey()+" "+m.getValue());
+        }
+    }
+```
 
 What is the importance of reflection in Java?
 
