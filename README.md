@@ -307,7 +307,7 @@ ArrayList and Vectors both implement the List interface, and both use (dynamical
 | ArrayList uses the Iterator interface to traverse the elements. | A Vector can use the Iterator interface or Enumeration interface to traverse the elements. |
 
 
-What makes a HashSet different from a TreeSet?
+## What makes a HashSet different from a TreeSet?
 
 | Key | Hash Set | Tree Set |
 | ------ | ------ | ------ |
@@ -318,7 +318,7 @@ What makes a HashSet different from a TreeSet?
 | Ordering  | HashSet does not maintain any order  |  TreeSet maintains an object in sorted order  |
 
 
-What are the differences between HashMap and HashTable in Java?
+## What are the differences between HashMap and HashTable in Java?
 
 | Hashmap | Hashtable |
 | ------ | ------ |
@@ -354,7 +354,7 @@ public static void main(String args[])
     }
 ```
 
-What is the importance of reflection in Java?
+## What is the importance of reflection in Java?
 
 Reflection is a runtime API for inspecting and changing the behavior of methods, classes, and interfaces. 
 Java Reflection allows you to analyze classes, interfaces, fields, and methods during runtime without knowing what they are called at compile time. 
@@ -362,15 +362,146 @@ Reflection can also be used to create new objects, call methods, and get/set fie
 External, user-defined classes can be used by creating instances of extensibility objects with their fully-qualified names. 
 Debuggers can also use reflection to examine private members of classes.
 
-Difference between HashMap and ConcurrentHashMap
+Reflection can be used to get information about –
 
-HashMap is the Class which is under Traditional Collection and ConcurrentHashMap is a Class which is under Concurrent Collections, apart from this there are various differences between them which are:
+1) **Class:** The ```getClass()``` method is used to get the name of the class to which an object belongs.
+2) **Constructors:** The ```getConstructors()``` method is used to get the public constructors of the class to which an object belongs.
+3) **Methods:** The ```getMethods()``` method is used to get the public methods of the class to which an objects belongs.
+
+```
+// A simple Java program to demonstrate the use of reflection
+import java.lang.reflect.Method;
+import java.lang.reflect.Field;
+import java.lang.reflect.Constructor;
+  
+// class whose object is to be created
+class Test
+{
+    // creating a private field
+    private String s;
+  
+    // creating a public constructor
+    public Test()  {  s = "GeeksforGeeks"; }
+  
+    // Creating a public method with no arguments
+    public void method1()  {
+        System.out.println("The string is " + s);
+    }
+  
+    // Creating a public method with int as argument
+    public void method2(int n)  {
+        System.out.println("The number is " + n);
+    }
+  
+    // creating a private method
+    private void method3() {
+        System.out.println("Private method invoked");
+    }
+}
+  
+class Demo
+{
+    public static void main(String args[]) throws Exception
+    {
+        // Creating object whose property is to be checked
+        Test obj = new Test();
+  
+        // Creating class object from the object using
+        // getclass method
+        Class cls = obj.getClass();
+        System.out.println("The name of class is " +
+                            cls.getName());
+  
+        // Getting the constructor of the class through the
+        // object of the class
+        Constructor constructor = cls.getConstructor();
+        System.out.println("The name of constructor is " +
+                            constructor.getName());
+  
+        System.out.println("The public methods of class are : ");
+  
+        // Getting methods of the class through the object
+        // of the class by using getMethods
+        Method[] methods = cls.getMethods();
+  
+        // Printing method names
+        for (Method method:methods)
+            System.out.println(method.getName());
+  
+        // creates object of desired method by providing the
+        // method name and parameter class as arguments to
+        // the getDeclaredMethod
+        Method methodcall1 = cls.getDeclaredMethod("method2",
+                                                 int.class);
+  
+        // invokes the method at runtime
+        methodcall1.invoke(obj, 19);
+  
+        // creates object of the desired field by providing
+        // the name of field as argument to the 
+        // getDeclaredField method
+        Field field = cls.getDeclaredField("s");
+  
+        // allows the object to access the field irrespective
+        // of the access specifier used with the field
+        field.setAccessible(true);
+  
+        // takes object and the new value to be assigned
+        // to the field as arguments
+        field.set(obj, "JAVA");
+  
+        // Creates object of desired method by providing the
+        // method name as argument to the getDeclaredMethod
+        Method methodcall2 = cls.getDeclaredMethod("method1");
+  
+        // invokes the method at runtime
+        methodcall2.invoke(obj);
+  
+        // Creates object of the desired method by providing
+        // the name of method as argument to the 
+        // getDeclaredMethod method
+        Method methodcall3 = cls.getDeclaredMethod("method3");
+  
+        // allows the object to access the method irrespective 
+        // of the access specifier used with the method
+        methodcall3.setAccessible(true);
+  
+        // invokes the method at runtime
+        methodcall3.invoke(obj);
+    }
+}
+```
+
+Output:
+```
+The name of class is Test
+The name of constructor is Test
+The public methods of class are : 
+method2
+method1
+wait
+wait
+wait
+equals
+toString
+hashCode
+getClass
+notify
+notifyAll
+The number is 19
+The string is JAVA
+Private method invoked
+```
+
+## Difference between HashMap and ConcurrentHashMap
+
+HashMap is the Class which is under Traditional Collection and ConcurrentHashMap is a Class which is under Concurrent Collections.
 
 HashMap is non-Synchronized in nature i.e. HashMap is not Thread-safe whereas ConcurrentHashMap is Thread-safe in nature.
 HashMap performance is relatively high because it is non-synchronized in nature and any number of threads can perform simultaneously. But ConcurrentHashMap performance is low sometimes because sometimes Threads are required to wait on ConcurrentHashMap.
 While one thread is Iterating the HashMap object, if other thread try to add/modify the contents of Object then we will get Run-time exception saying ConcurrentModificationException.Whereas In ConcurrentHashMap we won’t get any exception while performing any modification at the time of Iteration.
 
-Object Serialization:
+## Object Serialization:
 
 Serialization is a mechanism of converting the state of an object into a byte stream. The byte array can be the class, version, and internal state of the object.
 
