@@ -507,16 +507,16 @@ Serialization is a mechanism of converting the state of an object into a byte st
 
 Deserialization is the reverse process where the byte stream is used to recreate the actual Java object in memory. This mechanism is used to persist the object.
 
-Case 1: If the superclass is serializable, then subclass is automatically serializable
+**Case 1: If the superclass is serializable, then subclass is automatically serializable**
 If the superclass is Serializable, then by default, every subclass is serializable. Hence, even though subclass doesn’t implement Serializable interface( and if its superclass implements Serializable), then we can serialize subclass object.
 
-Case 2: If a superclass is not serializable, then subclass can still be serialized 
+**Case 2: If a superclass is not serializable, then subclass can still be serialized**
 Even though the superclass doesn’t implement a Serializable interface, we can serialize subclass objects if the subclass itself implements a Serializable interface. So we can say that to serialize subclass objects, superclass need not be serializable. But what happens with the instances of superclass during serialization in this case. The following procedure explains this.
 
-Case 2(a): What happens when a class is serializable, but its superclass is not?
+**Case 2(a): What happens when a class is serializable, but its superclass is not?**
 Serialization: At the time of serialization, if any instance variable inherits from the non-serializable superclass, then JVM ignores the original value of that instance variable and saves the default value to the file.
 
-What is a classloader in Java?
+## What is a classloader in Java?
 
 The Java ClassLoader is a subset of JVM (Java Virtual Machine) that is responsible for loading the class files. Whenever a Java program is executed it is first loaded by the classloader. Java provides three built-in classloaders:
 
@@ -524,7 +524,7 @@ Bootstrap ClassLoader
 Extension ClassLoader
 System/Application ClassLoader
 
-User-defined Custom Exception in Java
+## User-defined Custom Exception in Java
 
 An exception is an issue (run time error) that occurred during the execution of a program. When an exception occurred the program gets terminated abruptly and, the code past the line that generated the exception never gets executed.
 
@@ -541,7 +541,7 @@ Following are a few of the reasons to use custom exceptions:
 To catch and provide specific treatment to a subset of existing Java exceptions.
 Business logic exceptions: These are the exceptions related to business logic and workflow. It is useful for the application users or the developers to understand the exact problem.
 
-Design patterns:
+## Design patterns:
 
 A design pattern provides a general reusable solution for the common problems that occur in software design. 
 The pattern typically shows relationships and interactions between classes or objects. 
@@ -550,7 +550,7 @@ Design patterns are programming language independent strategies for solving a co
 That means a design pattern represents an idea, not a particular implementation. 
 By using design patterns, you can make your code more flexible, reusable, and maintainable.
 
-Types of Design Patterns
+##### Types of Design Patterns
 1) Creational 
 These design patterns are all about class instantiation or object creation.
 Creational design patterns are the Factory Method, Abstract Factory, Builder, Singleton, Object Pool, and Prototype. 
@@ -559,13 +559,13 @@ Creational design patterns are the Factory Method, Abstract Factory, Builder, Si
 These design patterns are about organizing different classes and objects to form larger structures and provide new functionality. 
 Structural design patterns are Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Private Class Data, and Proxy. 
 
-Singleton Design Pattern
+## Singleton Design Pattern
 
 The singleton pattern is one of the simplest design patterns. 
 Sometimes we need to have only one instance of our class for example a single DB connection shared by multiple objects as creating a separate DB connection for every object may be costly. Similarly, there can be a single configuration manager or error manager in an application that handles all problems instead of creating multiple managers
 
 The singleton pattern is a design pattern that restricts the instantiation of a class to one object. 
-
+```
 // Classical Java implementation of singleton
 // design pattern
 class Singleton
@@ -583,8 +583,177 @@ class Singleton
         return obj;
     }
 }
-
+```
 Here we have declared getInstance() static so that we can call it without instantiating the class. The first time getInstance() is called it creates a new singleton object and after that, it just returns the same object. Note that Singleton obj is not created until we need it and call getInstance() method. This is called lazy instantiation.
+
+## Runnable vs Callable
+
+| Runnable | Callable |
+| ------ | ------ |
+| It is a part of java.lang package | It is a part of the java.util.concurrent package |
+| It cannot return the return of computation. | It can return the result of the parallel processing of a task. |
+| It cannot throw a checked Exception. | It can throw a checked Exception. |
+| In a runnable interface, one needs to override the run() method in Java. | In order to use Callable, you need to override the call() |
+| Runnable.run() returns void | Callable.call() returns a generic value V  |
+
+**Runnable Example:**
+```
+public interface Runnable {
+    public void run();
+}
+
+public class EventLoggingTask implements  Runnable{
+    private Logger logger
+      = LoggerFactory.getLogger(EventLoggingTask.class);
+
+    @Override
+    public void run() {
+        logger.info("Message");
+    }
+}
+```
+**Callable Example:**
+```
+public interface Callable<V> {
+    V call() throws Exception;
+}
+
+public class FactorialTask implements Callable<Integer> {
+    int number;
+
+    // standard constructors
+
+    public Integer call() throws InvalidParamaterException {
+        int fact = 1;
+        // ...
+        for(int count = number; count > 1; count--) {
+            fact = fact * count;
+        }
+
+        return fact;
+    }
+}
+```
+
+## How to create Immutable class in Java?
+
+Immutable class in java means that once an object is created, we cannot change its content. In Java, all the wrapper classes (like Integer, Boolean, Byte, Short) and String class is immutable. We can create our own immutable class as well. 
+
+- The class must be declared as final so that child classes can’t be created.
+- Data members in the class must be declared private so that direct access is not allowed.
+- Data members in the class must be declared as final so that we can’t change the value of it after object creation.
+- A parameterized constructor should initialize all the fields performing a deep copy so that data members can’t be modified with an object reference.
+- Deep Copy of objects should be performed in the getter methods to return a copy rather than returning the actual object reference)
+
+```
+// Java Program to Create An Immutable Class
+
+// Importing required classes
+import java.util.HashMap;
+import java.util.Map;
+
+// Class 1
+// An immutable class
+final class Student {
+
+	// Member attributes of final class
+	private final String name;
+	private final int regNo;
+	private final Map<String, String> metadata;
+
+	// Constructor of immutable class
+	// Parameterized constructor
+	public Student(String name, int regNo,
+				Map<String, String> metadata)
+	{
+
+		// This keyword refers to current instance itself
+		this.name = name;
+		this.regNo = regNo;
+
+		// Creating Map object with reference to HashMap
+		// Declaring object of string type
+		Map<String, String> tempMap = new HashMap<>();
+
+		// Iterating using for-each loop
+		for (Map.Entry<String, String> entry :
+			metadata.entrySet()) {
+			tempMap.put(entry.getKey(), entry.getValue());
+		}
+
+		this.metadata = tempMap;
+	}
+
+	// Method 1
+	public String getName() { return name; }
+
+	// Method 2
+	public int getRegNo() { return regNo; }
+
+	// Note that there should not be any setters
+
+	// Method 3
+	// User -defined type
+	// To get meta data
+	public Map<String, String> getMetadata()
+	{
+
+		// Creating Map with HashMap reference
+		Map<String, String> tempMap = new HashMap<>();
+
+		for (Map.Entry<String, String> entry :
+			this.metadata.entrySet()) {
+			tempMap.put(entry.getKey(), entry.getValue());
+		}
+		return tempMap;
+	}
+}
+
+// Class 2
+// Main class
+class GFG {
+
+	// Main driver method
+	public static void main(String[] args)
+	{
+
+		// Creating Map object with reference to HashMap
+		Map<String, String> map = new HashMap<>();
+
+		// Adding elements to Map object
+		// using put() method
+		map.put("1", "first");
+		map.put("2", "second");
+
+		Student s = new Student("ABC", 101, map);
+
+		// Calling the above methods 1,2,3 of class1
+		// inside main() method in class2 and
+		// executing the print statement over them
+		System.out.println(s.getName());
+		System.out.println(s.getRegNo());
+		System.out.println(s.getMetadata());
+
+		// Uncommenting below line causes error
+		// s.regNo = 102;
+
+		map.put("3", "third");
+		// Remains unchanged due to deep copy in constructor
+		System.out.println(s.getMetadata());
+		s.getMetadata().put("4", "fourth");
+		// Remains unchanged due to deep copy in getter
+		System.out.println(s.getMetadata());
+	}
+}
+```
+output:
+```
+ABC
+101
+{1=first, 2=second}
+{1=first, 2=second}
+{1=first, 2=second}
+```
 
 
 What is Spring Framework?
