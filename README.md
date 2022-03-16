@@ -826,80 +826,78 @@ protected void finalize() throws Throwable
 
 # `Spring and Spring Boot Interview Questions`
 
-What is Spring Framework?
+## What is Spring Framework?
 
 Spring is a powerful open-source, loosely coupled, lightweight, java framework meant for reducing the complexity of developing enterprise-level applications. This framework is also called the “framework of frameworks” as spring provides support to various other important frameworks like JSF, Hibernate, Structs, EJB, etc.
 
-What are the features of Spring Framework?
-Spring framework follows a layered architecture pattern that helps in the necessary components selection along with providing a robust and cohesive framework for J2EE applications development.
-The AOP (Aspect Oriented Programming) part of Spring supports unified development by ensuring separation of the application’s business logic from other system services.
-Spring provides highly configurable MVC web application framework which has the ability to switch to other frameworks easily.
-Provides provision of creation and management of the configurations and defining the lifecycle of application objects.
-Spring has a special design principle which is known as IoC (Inversion of Control) that supports objects to give their dependencies rather than looking for creating dependent objects.
-Spring is a lightweight, java based, loosely coupled framework.
-Spring provides a generic abstraction layer for transaction management that is also very useful for container-less environments.
-Spring provides a convenient API to translate technology-specific exceptions (thrown by JDBC, Hibernate or other frameworks) into consistent, unchecked exceptions. This introduces abstraction and greatly simplifies exception handling.
+## What are the features of Spring Framework?
+- Spring framework follows a layered architecture pattern that helps in the necessary components selection along with providing a robust and cohesive framework for J2EE applications development.
+- The AOP (Aspect Oriented Programming) part of Spring supports unified development by ensuring separation of the application’s business logic from other system services.
+- Spring provides highly configurable MVC web application framework which has the ability to switch to other frameworks easily.
+- Provides provision of creation and management of the configurations and defining the lifecycle of application objects.
+- Spring has a special design principle which is known as IoC (Inversion of Control) that supports objects to give their dependencies rather than looking for creating dependent objects.
+- Spring is a lightweight, java based, loosely coupled framework.
+- Spring provides a generic abstraction layer for transaction management that is also very useful for container-less environments.
+- Spring provides a convenient API to translate technology-specific exceptions (thrown by JDBC, Hibernate or other frameworks) into consistent, unchecked exceptions. This introduces abstraction and greatly simplifies exception handling.
 
-What do you mean by IoC (Inversion of Control) Container?
+## What do you mean by IoC (Inversion of Control) Container?
 
 Spring container forms the core of the Spring Framework. The Spring container uses Dependency Injection (DI) for managing the application components by creating objects, wiring them together along with configuring and managing their overall life cycles. The instructions for the spring container to do the tasks can be provided either by XML configuration, Java annotations, or Java code.
 
-What do you understand by Dependency Injection?
+## What do you understand by Dependency Injection?
 
 The main idea in Dependency Injection is that you don’t have to create your objects but you just have to describe how they should be created.
 
 The components and services need not be connected by us in the code directly. We have to describe which services are needed by which components in the configuration file. The IoC container present in Spring will wire them up together.
 
 In Java, the 2 major ways of achieving dependency injection are:
-Constructor injection: Here, the IoC container invokes the class constructor with a number of arguments where each argument represents a dependency on the other class.
-Setter injection: Here, the spring container calls the setter methods on the beans after invoking a no-argument static factory method or defa
+- Constructor injection: Here, the IoC container invokes the class constructor with a number of arguments where each argument represents a dependency on the other class.
+- Setter injection: Here, the spring container calls the setter methods on the beans after invoking a no-argument static factory method or defa
 
-What are Spring Beans?
+## What are Spring Beans?
 
-They are the objects forming the backbone of the user’s application and are managed by the Spring IoC container.
-Spring beans are instantiated, configured, wired, and managed by IoC container.
-Beans are created with the configuration metadata that the users supply to the container (by means of XML or java annotations configurations.)
+- They are the objects forming the backbone of the user’s application and are managed by the Spring IoC container.
+- Spring beans are instantiated, configured, wired, and managed by IoC container.
+- Beans are created with the configuration metadata that the users supply to the container (by means of XML or java annotations configurations.)
 
-What are the bean scopes available in Spring?
+## What are the bean scopes available in Spring?
 The Spring Framework has five scope supports. They are:
 
-Singleton: The scope of bean definition while using this would be a single instance per IoC container.
-Prototype: Here, the scope for a single bean definition can be any number of object instances.
-Request: The scope of the bean definition is an HTTP request.
-Session: Here, the scope of the bean definition is HTTP-session.
-Global-session: The scope of the bean definition here is a Global HTTP session.
+- **Singleton:** The scope of bean definition while using this would be a single instance per IoC container.
+- **Prototype:** Here, the scope for a single bean definition can be any number of object instances.
+- **Request:** The scope of the bean definition is an HTTP request.
+- **Session:** Here, the scope of the bean definition is HTTP-session.
+- **Global-session:** The scope of the bean definition here is a Global HTTP session.
 Note: The last three scopes are available only if the users use web-aware ApplicationContext containers.
 
-Explain Bean life cycle in Spring Bean Factory Container.
+## Explain Bean life cycle in Spring Bean Factory Container.
 
-The IoC container instantiates the bean from the bean’s definition in the XML file.
-Spring then populates all of the properties using the dependency injection as specified in the bean definition.
-The bean factory container calls setBeanName() which take the bean ID and the corresponding bean has to implement BeanNameAware interface.
-The factory then calls setBeanFactory() by passing an instance of itself (if BeanFactoryAware interface is implemented in the bean).
-If BeanPostProcessors is associated with a bean, then the preProcessBeforeInitialization() methods are invoked.
-If an init-method is specified, then it will be called.
-Lastly, postProcessAfterInitialization() methods will be called if there are any BeanPostProcessors associated with the bean that needs to be run post creation.
+- The IoC container instantiates the bean from the bean’s definition in the XML file.
+- Spring then populates all of the properties using the dependency injection as specified in the bean definition.
+- The bean factory container calls `setBeanName()` which take the bean ID and the corresponding bean has to implement BeanNameAware interface.
+- The factory then calls `setBeanFactory()` by passing an instance of itself (if BeanFactoryAware interface is implemented in the bean).
+- If BeanPostProcessors is associated with a bean, then the `preProcessBeforeInitialization()` methods are invoked.
+- If an init-method is specified, then it will be called.
+- Lastly, postProcessAfterInitialization() methods will be called if there are any BeanPostProcessors associated with the bean that needs to be run post creation.
 
-What do you understand by the term ‘Spring Boot’?
-Spring Boot is an open-source, java-based framework that provides support for Rapid Application Development and gives a platform for developing stand-alone and production-ready spring applications with a need for very few configurations.
 
-Explain the advantages of using Spring Boot for application development.
-Spring Boot helps to create stand-alone applications which can be started using java.jar (Doesn’t require configuring WAR files).
-Spring Boot also offers pinpointed ‘started’ POMs to Maven configuration.
-Has provision to embed Undertow, Tomcat, Jetty, or other web servers directly.
-Auto-Configuration: Provides a way to automatically configure an application based on the dependencies present on the classpath.
-Spring Boot was developed with the intention of lessening the lines of code.
-It offers production-ready support like monitoring and apps developed using spring boot are easier to launch
+## Explain the advantages of using Spring Boot for application development.
+- Spring Boot helps to create stand-alone applications which can be started using java.jar (Doesn’t require configuring WAR files).
+- Spring Boot also offers pinpointed ‘started’ POMs to Maven configuration.
+- Has provision to embed Undertow, Tomcat, Jetty, or other web servers directly.
+- Auto-Configuration: Provides a way to automatically configure an application based on the dependencies present on the classpath.
+- Spring Boot was developed with the intention of lessening the lines of code.
+- It offers production-ready support like monitoring and apps developed using spring boot are easier to launch
 
-What are the features of Spring Boot?
-Spring Boot CLI – This allows you to Groovy / Maven for writing Spring boot application and avoids boilerplate code.
-Starter Dependency – With the help of this feature, Spring Boot aggregates common dependencies together and eventually improves productivity and reduces the burden on
-Spring Initializer – This is a web application that helps a developer in creating an internal project structure. The developer does not have to manually set up the structure of the project while making use of this feature.
-Auto-Configuration – This helps in loading the default configurations according to the project you are working on. In this way, unnecessary WAR files can be avoided.
-Spring Actuator – Spring boot uses actuator to provide “Management EndPoints” which helps the developer in going through the Application Internals, Metrics etc.
-Logging and Security – This ensures that all the applications made using Spring Boot are properly secured without any hassle.
+## What are the features of Spring Boot?
+- **Spring Boot CLI** – This allows you to Groovy / Maven for writing Spring boot application and avoids boilerplate code.
+- **Starter Dependency** – With the help of this feature, Spring Boot aggregates common dependencies together and eventually improves productivity and reduces the burden on
+- **Spring Initializer** – This is a web application that helps a developer in creating an internal project structure. The developer does not have to manually set up the structure of the project while making use of this feature.
+- **Auto-Configuration** – This helps in loading the default configurations according to the project you are working on. In this way, unnecessary WAR files can be avoided.
+- **Spring Actuator** – Spring boot uses actuator to provide “Management EndPoints” which helps the developer in going through the Application Internals, Metrics etc.
+- **Logging and Security** – This ensures that all the applications made using Spring Boot are properly secured without any hassle.
 
-Spring ApplicationContext
+## Spring ApplicationContext
 
 Spring ApplicationContext is where Spring holds instances of objects that it has identified to be managed and distributed automatically. These are called beans.
 
@@ -910,101 +908,36 @@ Using the Inversion of Control principle, Spring collects bean instances from ou
 The ability to use annotations like @Autowired to inject Spring-managed beans into our application is a driving force for creating powerful and scalable code in Spring
 
 
-Annotations in spring boot
+## Annotations in spring boot
 
 Spring Annotations are a form of metadata that provides data about a program. Annotations are used to provide supplemental information about a program. It does not have a direct effect on the operation of the code they annotate. It does not change the action of the compiled program.
 
-1) @SpringBootApplication
+1) **@SpringBootApplication**
 	@SpringBootApplication annotation is one point replacement for using @Configuration, @EnableAutoConfiguration and @ComponentScan annotations alongside their default attributes.
 	
-2) @Autowired
+2) **@Autowired**
 	@Autowired annotation is applied to the fields, setter methods, and constructors. It injects object dependency implicitly. We use @Autowired to mark the dependency that will be injected by the Spring container.	
 	
-3) @Qualifier
+3) **@Qualifier**
 	If more than one bean of the same type is available in the container, the framework will throw NoUniqueBeanDefinitionException, indicating that more than one bean is available for autowiring
 	
 	Ex. incase we have interface with multiple implementation then this issue will rails to avoid this issue we are using the @qulifier annotation.
 
-4)@Component
+4) **@Component**
 @Component is an annotation that allows Spring to automatically detect our custom beans.
 
 In other words, without having to write any explicit code, Spring will:
 
-Scan our application for classes annotated with @Component
-Instantiate them and inject any specified dependencies into them
-Inject them wherever needed
+- Scan our application for classes annotated with @Component
+- Instantiate them and inject any specified dependencies into them
+- Inject them wherever needed
 
 Stereotype Annotations
 Spring Framework provides us with some special annotations. These annotations are used to create Spring beans automatically in the application context. @Component annotation is the main Stereotype Annotation. There are some Stereotype meta-annotations which is derived from @Component those are
 
-1: @Service: We specify a class with @Service to indicate that they’re holding the business logic. Besides being used in the service layer, there isn’t any other special use for this annotation. The utility classes can be marked as Service classes.
+1 **@Service:** We specify a class with @Service to indicate that they’re holding the business logic. Besides being used in the service layer, there isn’t any other special use for this annotation. The utility classes can be marked as Service classes.
 
-2: @Repository: We specify a class with @Repository to indicate that they’re dealing with CRUD operations, usually, it’s used with DAO (Data Access Object) or Repository implementations that deal with database tables.
+2 **@Repository:** We specify a class with @Repository to indicate that they’re dealing with CRUD operations, usually, it’s used with DAO (Data Access Object) or Repository implementations that deal with database tables.
 
-3: @Controller: We specify a class with @Controller to indicate that they’re front controllers and responsible to handle user requests and return the appropriate response. It is mostly used with REST Web Services.
-
-Runnable VS Callable
-
-
-Runnable
-Callable
-It is a part of java.lang package
-It is a part of the java.util.concurrent package
-It cannot return the return of computation.
-It can return the result of the parallel processing of a task.
-It cannot throw a checked Exception.	
-It can throw a checked Exception.
-In a runnable interface, one needs to override the run() method in Java.
-In order to use Callable, you need to override the call()
-Runnable.run() returns void
-Callable.call() returns a generic value V  
-
-
-Runnable Example:
-
-public interface Runnable {
-    public void run();
-}
-
-public class EventLoggingTask implements  Runnable{
-    private Logger logger
-      = LoggerFactory.getLogger(EventLoggingTask.class);
-
-    @Override
-    public void run() {
-        logger.info("Message");
-    }
-}
-
-Callable Example:
-
-public interface Callable<V> {
-    V call() throws Exception;
-}
-
-public class FactorialTask implements Callable<Integer> {
-    int number;
-
-    // standard constructors
-
-    public Integer call() throws InvalidParamaterException {
-        int fact = 1;
-        // ...
-        for(int count = number; count > 1; count--) {
-            fact = fact * count;
-        }
-
-        return fact;
-    }
-}
-
-How to create Immutable class in Java?
-
-Immutable class in java means that once an object is created, we cannot change its content. In Java, all the wrapper classes (like Integer, Boolean, Byte, Short) and String class is immutable. We can create our own immutable class as well. 
-
-The class must be declared as final so that child classes can’t be created.
-Data members in the class must be declared private so that direct access is not allowed.
-Data members in the class must be declared as final so that we can’t change the value of it after object creation.
-A parameterized constructor should initialize all the fields performing a deep copy so that data members can’t be modified with an object reference.
-Deep Copy of objects should be performed in the getter methods to return a copy rather than returning the actual object reference)
+3: **@Controller:** We specify a class with @Controller to indicate that they’re front controllers and responsible to handle user requests and return the appropriate response. It is mostly used with REST Web Services.
 
