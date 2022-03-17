@@ -39,6 +39,12 @@ Now, class C will search the definition of m1. First, it will search in class if
 
 Java supports multiple inheritance through interfaces only. A class can implement any number of interfaces but can extend only one class.
 
+## why top level class could not be static
+
+static keyword is meant for providing memory and executing logic without creating Objects, a class does not have a value logic directly, so the static keyword is not allowed for outer class
+
+If you declare the outer class as static, it will not allow to compile giving : Illegal modifier for the class classname; only public, abstract & final are permitted
+
 ## What happens when a main method is declared as private?
 When a method is declared as private, the program compiles properly but it will give runtime error. **Main method not public**
 
@@ -49,6 +55,12 @@ In Java, methods and data members can be encapsulated by the following four acce
 2) **default or package-private:** - when no access specifier is specified
 3) **protected:** - accessible only to classes that subclass your class directly within the current or different package
 4) **public** - accessible from any class
+
+## static class vs singleton class
+
+Static class always a inner class and static class can create multiple objects. All object have different reference value.
+
+But on the other hand SingleTon class can have only single object because every object reference variable have same reference value.
 
 ## What are the characteristics of Java 8? (SHORT)
 1) Lambda expressions
@@ -358,6 +370,39 @@ ArrayList and Vectors both implement the List interface, and both use (dynamical
 | Ordering  | HashSet does not maintain any order  |  TreeSet maintains an object in sorted order  |
 
 
+## Difference between ArrayList and LinkedList
+
+ArrayList and LinkedList both implements List interface and maintains insertion order. Both are non synchronized classes.
+
+| ArrayList | LinkedList |
+| ------ | ------ |
+| ArrayList internally uses a dynamic array to store the elements. | LinkedList internally uses a doubly linked list to store the elements. |
+| Manipulation with ArrayList is slow because it internally uses an array. If any element is removed from the array, all the bits are shifted in memory. | Manipulation with LinkedList is faster than ArrayList because it uses a doubly linked list, so no bit shifting is required in memory. |
+| An ArrayList class can act as a list only because it implements List only. | LinkedList class can act as a list and queue both because it implements List and Deque interfaces. |
+|ArrayList is better for storing and accessing data. | LinkedList is better for manipulating data. |
+
+```
+import java.util.*;
+class TestArrayLinked {
+    public static void main(String args[]) {
+
+        List < String > al = new ArrayList < String > (); //creating arraylist    
+        al.add("Ravi"); //adding object in arraylist    
+        al.add("Vijay");
+        al.add("Ravi");
+        al.add("Ajay");
+
+        List < String > al2 = new LinkedList < String > (); //creating linkedlist    
+        al2.add("James"); //adding object in linkedlist    
+        al2.add("Serena");
+        al2.add("Swati");
+        al2.add("Junaid");
+
+        System.out.println("arraylist: " + al);
+        System.out.println("linkedlist: " + al2);
+    }
+}
+```
 ## What are the differences between HashMap and HashTable in Java?
 
 | Hashmap | Hashtable |
@@ -555,6 +600,29 @@ Even though the superclass doesn’t implement a Serializable interface, we can 
 
 **Case 2(a): What happens when a class is serializable, but its superclass is not?**
 Serialization: At the time of serialization, if any instance variable inherits from the non-serializable superclass, then JVM ignores the original value of that instance variable and saves the default value to the file.
+
+## How to stop serilalize
+By using **transient** keyword
+
+```
+// A sample class that uses transient keyword to
+// skip their serialization.
+class Test implements Serializable
+{
+    // Making password transient for security
+    private transient String password;
+  
+    // Making age transient as age is auto-
+    // computable from DOB and current date.
+    transient int age;
+  
+    // serialize other fields
+    private String username, email;
+    Date dob;
+  
+    // other code
+}
+```
 
 ## What is a classloader in Java?
 
