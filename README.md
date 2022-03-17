@@ -39,6 +39,17 @@ Now, class C will search the definition of m1. First, it will search in class if
 
 Java supports multiple inheritance through interfaces only. A class can implement any number of interfaces but can extend only one class.
 
+## What happens when a main method is declared as private?
+When a method is declared as private, the program compiles properly but it will give runtime error. **Main method not public**
+
+## Access specifiers
+
+In Java, methods and data members can be encapsulated by the following four access specifiers. The access specifiers are listed according to their restrictiveness order. 
+1) **private:** - accessible within the class where defined
+2) **default or package-private:** - when no access specifier is specified
+3) **protected:** - accessible only to classes that subclass your class directly within the current or different package
+4) **public** - accessible from any class
+
 ## What are the characteristics of Java 8? (SHORT)
 1) Lambda expressions
 2) Functional interfaces
@@ -308,6 +319,10 @@ Variables declared in a Java interface are by default final. An abstract class m
 Abstract class can have final, non-final, static and non-static variables. The interface has only static and final variables.
 **4) Implementation:**
 Abstract class can provide the implementation of the interface. Interface can’t provide the implementation of an abstract class.
+
+**access specifiers that can be used by interfaces and abstract classes:**
+- **Interface:** Public or default
+- **Abstract Class:** (Anything ) : public , private or Default
 
 ## Inheritance vs Abstraction: 
 1) A Java interface can be implemented using the keyword “implements” and an abstract class can be extended using the keyword “extends”.
