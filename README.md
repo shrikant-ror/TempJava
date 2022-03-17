@@ -45,6 +45,10 @@ static keyword is meant for providing memory and executing logic without creatin
 
 If you declare the outer class as static, it will not allow to compile giving : Illegal modifier for the class classname; only public, abstract & final are permitted
 
+## what modifiers are used with top-level class
+
+top-level class with public, abstract, and final modifiers. Top-level classes can only have public, abstract, and final modifiers, and it is also possible to not define any class modifiers at all. This is called default/package accessibility
+
 ## What happens when a main method is declared as private?
 When a method is declared as private, the program compiles properly but it will give runtime error. **Main method not public**
 
@@ -56,11 +60,31 @@ In Java, methods and data members can be encapsulated by the following four acce
 3) **protected:** - accessible only to classes that subclass your class directly within the current or different package
 4) **public** - accessible from any class
 
+
 ## static class vs singleton class
 
 Static class always a inner class and static class can create multiple objects. All object have different reference value.
 
 But on the other hand SingleTon class can have only single object because every object reference variable have same reference value.
+
+## Explain final, finalize() and finally?
+
+- **final:** 
+  1) final key word can be used for class,method and variables.
+  2) A final class cannot be subclassed and it prevents other programmers from subclassing a secure class to invoke insecure methods.
+  3) A final method can't be overridden.
+  4) A final variable can't change from it's initialize value.
+
+- **finalize():**
+finalize() method is used just before an object is destroyed and can be called just prior to garbage collection.
+
+- **finally:**
+   1) finally, a key word used in exception handling,creates a block of code that will be executed after a try/catch block has completed and before the code following the try//catch block. 
+   2) The finally block will execute whether or not an exception is thrown.
+   3) For example , if a method opens a file upon exit,then you will not want the code that closes the file to be bypassed by the exception-handling mechanism. This finally keyword is designed to address this contingency.
+
+## Difference between volatile and transient keywords 
+
 
 ## What are the characteristics of Java 8? (SHORT)
 1) Lambda expressions
@@ -623,6 +647,17 @@ class Test implements Serializable
     // other code
 }
 ```
+
+## Difference between volatile and transient keywords
+
+**Volatile:**
+
+The Volatile keyword is used to mark the JVM and thread to read its value from primary memory and not utilize cached value present in the thread stack. It is used in concurrent programming in java.
+
+**Transient:**
+
+The Transient keyword is used with the instance variable to eliminate it from the serialization process. During serialization, the value of the transient field or variable is not saved.
+
 
 ## What is a classloader in Java?
 
