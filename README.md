@@ -1147,6 +1147,7 @@ public class Student
         private String address;
         //Setters and Getters
     }
+
 ```
 Here’s a Student class followed by bean configuration file:
 
@@ -1162,9 +1163,11 @@ studentbean.xml
 </bean>
 </property>
 </bean>
+
 ```
-								  
+
 ## What are the features of Spring Boot?
+
 - **Spring Boot CLI** – This allows you to Groovy / Maven for writing Spring boot application and avoids boilerplate code.
 - **Starter Dependency** – With the help of this feature, Spring Boot aggregates common dependencies together and eventually improves productivity and reduces the burden on
 - **Spring Initializer** – This is a web application that helps a developer in creating an internal project structure. The developer does not have to manually set up the structure of the project while making use of this feature.
@@ -1174,14 +1177,10 @@ studentbean.xml
 
 ## Spring ApplicationContext
 
-Spring ApplicationContext is where Spring holds instances of objects that it has identified to be managed and distributed automatically. These are called beans.
-
-Bean management and the opportunity for dependency injection are some of Spring's main features.
-
-Using the Inversion of Control principle, Spring collects bean instances from our application and uses them at the appropriate time. We can show bean dependencies to Spring without needing to handle the setup and instantiation of those objects.
-
-The ability to use annotations like @Autowired to inject Spring-managed beans into our application is a driving force for creating powerful and scalable code in Spring
-
+- Spring ApplicationContext is where Spring holds instances of objects that it has identified to be managed and distributed automatically. These are called beans.
+- Bean management and the opportunity for dependency injection are some of Spring's main features.
+- Using the Inversion of Control principle, Spring collects bean instances from our application and uses them at the appropriate time. We can show bean dependencies to Spring without needing to handle the setup and instantiation of those objects.
+- The ability to use annotations like @Autowired to inject Spring-managed beans into our application is a driving force for creating powerful and scalable code in Spring
 
 ## Annotations in spring boot
 
