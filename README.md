@@ -1011,6 +1011,24 @@ The instructions for the spring container to do the tasks can be provided either
 
 ![image](https://user-images.githubusercontent.com/2870964/159125244-a07245c7-c63d-4d1a-81f5-eb8122aaaa33.png)
 
+## How many types of IOC containers are there in spring?
+- **BeanFactory:** BeanFactory is like a factory class that contains a collection of beans. It instantiates the bean whenever asked for by clients.
+- **ApplicationContext:** The ApplicationContext interface is built on top of the BeanFactory interface. It provides some extra functionality on top BeanFactory.
+
+| BeanFactory | ApplicationContext |
+| ------ | ------ |
+| It is an interface defined in org.springframework.beans.factory.BeanFactory | It is an interface defined in org.springframework.context.ApplicationContext |
+| It uses Lazy initialization | It uses Eager/ Aggressive initialization |
+| It explicitly provides a resource object using the syntax | It creates and manages resource objects on its own |
+| It doesn’t supports internationalization | It supports internationalization |
+| It doesn’t supports annotation based dependency     | It supports annotation based dependency |
+
+## List some of the benefits of IoC.
+- It will minimize the amount of code in your application.
+- It will make your application easy to test because it doesn’t require any singletons or JNDI lookup mechanisms in your unit test cases.
+- It promotes loose coupling with minimal effort and least intrusive mechanism.
+- It supports eager instantiation and lazy loading of the services.
+
 ## What do you understand by Dependency Injection?
 
 The main idea in Dependency Injection is that you don’t have to create your objects but you just have to describe how they should be created.
@@ -1018,8 +1036,15 @@ The main idea in Dependency Injection is that you don’t have to create your ob
 The components and services need not be connected by us in the code directly. We have to describe which services are needed by which components in the configuration file. The IoC container present in Spring will wire them up together.
 
 In Java, the 2 major ways of achieving dependency injection are:
-- Constructor injection: Here, the IoC container invokes the class constructor with a number of arguments where each argument represents a dependency on the other class.
-- Setter injection: Here, the spring container calls the setter methods on the beans after invoking a no-argument static factory method or defa
+- **Constructor injection:** Here, the IoC container invokes the class constructor with a number of arguments where each argument represents a dependency on the other class.
+- **Setter injection:** Here, the spring container calls the setter methods on the beans after invoking a no-argument static factory method
+
+| Constructor Injection | Setter Injection |
+| ------ | ------ |
+| There is no partial injection. | There can be partial injection. |
+| It doesn’t override the setter property. | It overrides the constructor property. |
+| It will create a new instance if any modification is done. | It will not create new instance if any modification is done. |
+| It works better for many properties. | It works better for few properties. |
 
 ## What are the different components of a Spring application?
 A Spring application, generally consists of following components:
@@ -1035,6 +1060,44 @@ A Spring application, generally consists of following components:
 - They are the objects forming the backbone of the user’s application and are managed by the Spring IoC container.
 - Spring beans are instantiated, configured, wired, and managed by IoC container.
 - Beans are created with the configuration metadata that the users supply to the container (by means of XML or java annotations configurations.)
+
+![image](https://user-images.githubusercontent.com/2870964/159126149-8d45395c-b20b-49a9-9a0a-890d81293aaa.png)
+
+## How configuration metadata is provided to the Spring container?
+
+**XML-Based configuration:** 
+- In Spring Framework, the dependencies and the services needed by beans are specified in configuration files which are in XML format. 
+- These configuration files usually contain a lot of bean definitions and application specific configuration options. 
+- They generally start with a `bean` tag. For example:
+
+```
+<bean id="studentbean" class="org.edureka.firstSpring.StudentBean">
+ <property name="name" value="Edureka"></property>
+</bean>
+```
+**Annotation-Based configuration:** 
+- Instead of using XML to describe a bean wiring, you can configure the bean into the component class itself by using annotations on the relevant class, method, or field declaration. 
+- By default, annotation wiring is not turned on in the Spring container. So, you need to enable it in your Spring configuration file before using it. For example:
+
+```
+<beans>
+<context:annotation-config/>
+<!-- bean definitions go here -->
+</beans>
+```
+
+**Java-based configuration:**
+- The key features in Spring Framework’s new Java-configuration support are `@Configuration` annotated classes and `@Bean` annotated methods.
+- `@Bean` annotation plays the same role as the <bean/> element.
+- `@Configuration` classes allows to define inter-bean dependencies by simply calling other `@Bean` methods in the same class.
+
+```
+@Configuration
+public class StudentConfig { 
+  @Bean
+  public StudentBean myStudent() 
+  { return new StudentBean(); }}
+```
 
 ## What are the bean scopes available in Spring?
 The Spring Framework has five scope supports. They are:
@@ -1056,6 +1119,7 @@ Note: The last three scopes are available only if the users use web-aware Applic
 - If an init-method is specified, then it will be called.
 - Lastly, postProcessAfterInitialization() methods will be called if there are any BeanPostProcessors associated with the bean that needs to be run post creation.
 
+![image](https://user-images.githubusercontent.com/2870964/159126748-ee675a99-4bfd-4494-9792-ec1a9674321c.png)
 
 ## Explain the advantages of using Spring Boot for application development.
 - Spring Boot helps to create stand-alone applications which can be started using java.jar (Doesn’t require configuring WAR files).
@@ -1065,6 +1129,41 @@ Note: The last three scopes are available only if the users use web-aware Applic
 - Spring Boot was developed with the intention of lessening the lines of code.
 - It offers production-ready support like monitoring and apps developed using spring boot are easier to launch
 
+## Explain inner beans in Spring.
+
+- A bean can be declared as an inner bean only when it is used as a property of another bean. 
+- For defining a bean, the Spring’s XML based configuration metadata provides the use of <bean> element inside the <property> or <constructor-arg>. 
+- Inner beans are always anonymous and they are always scoped as prototypes. 
+- For example, let’s say we have one Student class having reference of Person class. Here we will be creating only one instance of Person class and use it inside Student.
+	
+```
+public class Student
+    {
+        private Person person;
+        //Setters and Getters
+    }
+    public class Person
+    {
+        private String name;
+        private String address;
+        //Setters and Getters
+    }
+```
+Here’s a Student class followed by bean configuration file:
+
+studentbean.xml
+```
+<bean id=“StudentBean" class="com.edureka.Student">
+	<property name="person">
+		<!--This is inner bean -->
+		<bean class="com.edureka.Person">
+			<property name="name" value=“Scott"></property>
+			<property name="address" value=“Bangalore"></property>
+		</bean>
+	</property>
+</bean>
+```
+								  
 ## What are the features of Spring Boot?
 - **Spring Boot CLI** – This allows you to Groovy / Maven for writing Spring boot application and avoids boilerplate code.
 - **Starter Dependency** – With the help of this feature, Spring Boot aggregates common dependencies together and eventually improves productivity and reduces the burden on
