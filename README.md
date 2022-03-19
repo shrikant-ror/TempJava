@@ -946,21 +946,70 @@ protected void finalize() throws Throwable
 
 ## What is Spring Framework?
 
-Spring is a powerful open-source, loosely coupled, lightweight, java framework meant for reducing the complexity of developing enterprise-level applications. This framework is also called the “framework of frameworks” as spring provides support to various other important frameworks like JSF, Hibernate, Structs, EJB, etc.
+Spring is a powerful open-source, loosely coupled, lightweight, java framework meant for reducing the complexity of developing enterprise-level applications. 
+
+This framework is also called the “framework of frameworks” as spring provides support to various other important frameworks like JSF, Hibernate, Structs, EJB, etc.
+
+Spring handles all the infrastructure-related aspects which lets the programmer to focus mostly on application development.
+
+There are around 20 modules which are generalized into the following types:
+- Core Container
+- Data Access/Integration
+- Web
+- AOP (Aspect Oriented Programming)
+- Instrumentation
+- Messaging
+- Test
+
+![image](https://user-images.githubusercontent.com/2870964/159125299-64693470-64f3-435e-983e-0f14b9f1e2ea.png)
+
+**Spring Core Container** – This layer is basically the core of Spring Framework. It contains the following modules :
+- Spring Core
+- Spring Bean
+- SpEL (Spring Expression Language)
+- Spring Context 
+
+**Data Access/Integration** – This layer provides support to interact with the database. It contains the following modules :
+- JDBC (Java DataBase Connectivity)
+- ORM (Object Relational Mapping)
+- OXM (Object XML Mappers)
+- JMS (Java Messaging Service)
+- Transaction
+
+**Web** – This layer provides support to create web application. It contains the following modules :
+- Web
+- Web – MVC
+- Web – Socket
+- Web – Portlet
+
+**Aspect Oriented Programming (AOP)** – In this layer you can use Advices, Pointcuts etc., to decouple the code.
+**Instrumentation** – This layer provides support to class instrumentation and classloader implementations.
+**Test** – This layer provides support to testing with JUnit and TestNG.
+
+Few Miscellaneous modules are given below:
+
+**Messaging** – This module provides support for STOMP. It also supports an annotation programming model that is used for routing and processing STOMP messages from WebSocket clients.
+**Aspects** – This module provides support to integration with AspectJ.
 
 ## What are the features of Spring Framework?
-- Spring framework follows a layered architecture pattern that helps in the necessary components selection along with providing a robust and cohesive framework for J2EE applications development.
-- The AOP (Aspect Oriented Programming) part of Spring supports unified development by ensuring separation of the application’s business logic from other system services.
-- Spring provides highly configurable MVC web application framework which has the ability to switch to other frameworks easily.
-- Provides provision of creation and management of the configurations and defining the lifecycle of application objects.
-- Spring has a special design principle which is known as IoC (Inversion of Control) that supports objects to give their dependencies rather than looking for creating dependent objects.
-- Spring is a lightweight, java based, loosely coupled framework.
-- Spring provides a generic abstraction layer for transaction management that is also very useful for container-less environments.
-- Spring provides a convenient API to translate technology-specific exceptions (thrown by JDBC, Hibernate or other frameworks) into consistent, unchecked exceptions. This introduces abstraction and greatly simplifies exception handling.
+- **Lightweight:** Spring is lightweight when it comes to size and transparency. 
+- **Inversion of control (IOC):** The objects give their dependencies instead of creating or looking for dependent objects. This is called Inversion Of Control.
+- **Aspect oriented Programming (AOP):** Aspect oriented programming in Spring supports cohesive development by separating application business logic from system services.
+- **Container:** Spring Framework creates and manages the life cycle and configuration of the application objects.
+- **MVC Framework:** Spring Framework’s MVC web application framework is highly configurable. Other frameworks can also be used easily instead of Spring MVC Framework.
+- **Transaction Management:** Generic abstraction layer for transaction management is provided by the Spring Framework. Spring’s transaction support can be also used in container less environments.
+- **JDBC Exception Handling:** The JDBC abstraction layer of the Spring offers an exception hierarchy, which simplifies the error handling strategy.
+
+##  What is a Spring configuration file
+A Spring configuration file is basically an XML file that mainly contains the classes information and describes how those classes are configured and linked to each other. The XML configuration files are verbose and cleaner.
 
 ## What do you mean by IoC (Inversion of Control) Container?
 
-Spring container forms the core of the Spring Framework. The Spring container uses Dependency Injection (DI) for managing the application components by creating objects, wiring them together along with configuring and managing their overall life cycles. The instructions for the spring container to do the tasks can be provided either by XML configuration, Java annotations, or Java code.
+Spring container forms the core of the Spring Framework. The Spring container uses Dependency Injection (DI) for managing the application components by creating objects, wiring them together along with configuring and managing their overall life cycles. 
+
+The instructions for the spring container to do the tasks can be provided either by XML configuration, Java annotations, or Java code.
+
+![image](https://user-images.githubusercontent.com/2870964/159125244-a07245c7-c63d-4d1a-81f5-eb8122aaaa33.png)
 
 ## What do you understand by Dependency Injection?
 
@@ -971,6 +1020,15 @@ The components and services need not be connected by us in the code directly. We
 In Java, the 2 major ways of achieving dependency injection are:
 - Constructor injection: Here, the IoC container invokes the class constructor with a number of arguments where each argument represents a dependency on the other class.
 - Setter injection: Here, the spring container calls the setter methods on the beans after invoking a no-argument static factory method or defa
+
+## What are the different components of a Spring application?
+A Spring application, generally consists of following components:
+
+- **Interface:** It defines the functions.
+- **Bean class:** It contains properties, its setter and getter methods, functions etc.
+- **Spring Aspect Oriented Programming (AOP):** Provides the functionality of cross-cutting concerns.
+- **Bean Configuration File:** Contains the information of classes and how to configure them.
+- **User program:** It uses the function.
 
 ## What are Spring Beans?
 
