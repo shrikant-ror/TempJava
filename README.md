@@ -83,9 +83,6 @@ finalize() method is used just before an object is destroyed and can be called j
    2) The finally block will execute whether or not an exception is thrown.
    3) For example , if a method opens a file upon exit,then you will not want the code that closes the file to be bypassed by the exception-handling mechanism. This finally keyword is designed to address this contingency.
 
-## Difference between volatile and transient keywords 
-
-
 ## What are the characteristics of Java 8? (SHORT)
 1) Lambda expressions
 2) Functional interfaces
