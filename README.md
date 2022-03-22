@@ -1232,3 +1232,98 @@ Spring Framework provides us with some special annotations. These annotations ar
 - This marks a class as a Spring Web MVC controller. 
 - Beans marked with it are automatically imported into the Dependency Injection container
 
+## What do you understand by @Required annotation?
+
+- @Required is applied to bean property setter methods. 
+- This annotation simply indicates that the affected bean property must be populated at the configuration time with the help of an explicit property value in a bean definition or with autowiring. 
+- If the affected bean property has not been populated, the container will throw `BeanInitializationException`.
+
+```
+public class Employee {
+    private String name;
+    @Required
+    public void setName(String name) {
+        this.name = name;
+    }
+    public string getName() {
+        return name;
+    }
+}
+```
+
+## What do you understand by @Autowired annotation?
+- The @Autowired annotation provides more accurate control over where and how autowiring should be done. 
+- This annotation is used to autowire bean on the setter methods, constructor, a property or methods with arbitrary names or multiple arguments. 
+- By default, it is a type driven injection.
+
+```
+public class Employee {
+    private String name;
+    @Autowired
+    public void setName(String name) {
+        this.name = name;
+    }
+    public string getName() {
+        return name;
+    }
+}
+```
+
+## What do you understand by @Qualifier annotation?
+- When you create more than one bean of the same type and want to wire only one of them with a property  you can use the @Qualifier annotation along with @Autowired to remove the ambiguity by specifying which exact bean should be wired.
+
+For example, here we have two classes, Employee and EmpAccount respectively. In EmpAccount, using @Qualifier its specified that bean with id emp1 must be wired.
+
+Employee.java
+```
+public class Employee {
+    private String name;
+    @Autowired
+    public void setName(String name) {
+        this.name = name;
+    }
+    public string getName() {
+        return name;
+    }
+}
+```
+
+EmpAccount.java
+```
+public class EmpAccount {
+    private Employee emp;
+    @Autowired
+    @Qualifier(emp1)
+    public void showName() {
+        System.out.println(“Employee name: ”+emp.getName);
+    }
+}
+```
+## Can We Have Multiple Spring Configuration Files in One Project
+
+Yes, in large projects, having multiple Spring configurations is recommended to increase maintainability and modularity.
+
+We can load multiple Java-based configuration files:
+```
+@Configuration
+@Import({MainConfig.class, SchedulerConfig.class})
+public class AppConfig {
+```
+
+Or we can load one XML file that will contain all other configs:
+```
+ApplicationContext context = new ClassPathXmlApplicationContext("spring-all.xml");
+```
+And inside this XML file we'll have the following:
+```
+<import resource="main.xml"/>
+<import resource="scheduler.xml"/>
+```
+
+## What Is Spring Security?
+
+- Spring Security is a separate module of the Spring framework that focuses on providing authentication and authorization methods in Java applications.
+- It also takes care of most of the common security vulnerabilities such as CSRF attacks.
+- To use Spring Security in web applications, we can get started with the simple annotation @EnableWebSecurity.
+
+
