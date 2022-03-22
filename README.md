@@ -1149,6 +1149,20 @@ public class Person {
 </property>
 </bean>
 ```
+## Define Bean Wiring.
+- When beans are combined together within the Spring container, it’s called wiring or bean wiring. 
+- The Spring container needs to know what beans are needed and how the container should use dependency injection to tie the beans together, while wiring beans.
+
+## What do you understand by auto wiring and name the different modes of it?
+- The Spring container is able to autowire relationships between the collaborating beans. 
+- That is, it is possible to let Spring resolve collaborators for your bean automatically by inspecting the contents of the BeanFactory.
+- Different modes of bean auto-wiring are:
+1) **no:** This is default setting which means no autowiring. Explicit bean reference should be used for wiring.
+2) **byName:** It injects the object dependency according to name of the bean. It matches and wires its properties with the beans defined by the same names in the XML file.
+3) **byType:** It injects the object dependency according to type. It matches and wires a property if its type matches with exactly one of the beans name in XML file.
+4) **constructor:** It injects the dependency by calling the constructor of the class. It has a large number of parameters.
+5) **autodetect:** First the container tries to wire using autowire by constructor, if it can’t then it tries to autowire by byType.
+
 ## Explain the advantages of using Spring Boot for application development.
 - Spring Boot helps to create stand-alone applications which can be started using java.jar (Doesn’t require configuring WAR files).
 - Spring Boot also offers pinpointed ‘started’ POMs to Maven configuration.
@@ -1156,43 +1170,6 @@ public class Person {
 - Auto-Configuration: Provides a way to automatically configure an application based on the dependencies present on the classpath.
 - Spring Boot was developed with the intention of lessening the lines of code.
 - It offers production-ready support like monitoring and apps developed using spring boot are easier to launch
-
-## Explain inner beans in Spring.
-- A bean can be declared as an inner bean only when it is used as a property of another bean. 
-- For defining a bean, the Spring’s XML based configuration metadata provides the use of <bean> element inside the <property> or <constructor-arg>. 
-- Inner beans are always anonymous and they are always scoped as prototypes. 
-- For example, let’s say we have one Student class having reference of Person class. Here we will be creating only one instance of Person class and use it inside Student.
-
-```
-public class Student
-    {
-        private Person person;
-        //Setters and Getters
-    }
-    public class Person
-    {
-        private String name;
-        private String address;
-        //Setters and Getters
-    }
-
-```
-Here’s a Student class followed by bean configuration file:
-
-studentbean.xml
-
-```
-<bean id=“StudentBean" class="com.edureka.Student">
-<property name="person">
-<!--This is inner bean -->
-<bean class="com.edureka.Person">
-<property name="name" value=“Scott"></property>
-<property name="address" value=“Bangalore"></property>
-</bean>
-</property>
-</bean>
-
-```
 
 ## What are the features of Spring Boot?
 
@@ -1215,18 +1192,21 @@ studentbean.xml
 Spring Annotations are a form of metadata that provides data about a program. Annotations are used to provide supplemental information about a program. It does not have a direct effect on the operation of the code they annotate. It does not change the action of the compiled program.
 
 1) **@SpringBootApplication**
-	@SpringBootApplication annotation is one point replacement for using @Configuration, @EnableAutoConfiguration and @ComponentScan annotations alongside their default attributes.
+- @SpringBootApplication annotation is one point replacement for using @Configuration, @EnableAutoConfiguration and @ComponentScan annotations alongside their default attributes.
 	
-2) **@Autowired**
-	@Autowired annotation is applied to the fields, setter methods, and constructors. It injects object dependency implicitly. We use @Autowired to mark the dependency that will be injected by the Spring container.	
+2) **@Autowired:** 
+- @Autowired annotation is applied to the fields, setter methods, and constructors. 
+- It injects object dependency implicitly. We use @Autowired to mark the dependency that will be injected by the Spring container.	
 	
-3) **@Qualifier**
-	If more than one bean of the same type is available in the container, the framework will throw NoUniqueBeanDefinitionException, indicating that more than one bean is available for autowiring
-	
-	Ex. incase we have interface with multiple implementation then this issue will rails to avoid this issue we are using the @qulifier annotation.
+3) **@Qualifier:** 
+- If more than one bean of the same type is available in the container, the framework will throw NoUniqueBeanDefinitionException, indicating that more than one bean is available for autowiring
+Ex. incase we have interface with multiple implementation then avoid issue we are using the @qulifier annotation.
 
-4) **@Component**
-@Component is an annotation that allows Spring to automatically detect our custom beans.
+4) **@Component:** 
+- @Component is an annotation that allows Spring to automatically detect our custom beans.
+- This marks a java class as a bean. 
+- It is a generic stereotype for any Spring-managed component. 
+- The component-scanning mechanism of spring now can pick it up and pull it into the application context.
 
 In other words, without having to write any explicit code, Spring will:
 
@@ -1237,9 +1217,18 @@ In other words, without having to write any explicit code, Spring will:
 Stereotype Annotations
 Spring Framework provides us with some special annotations. These annotations are used to create Spring beans automatically in the application context. @Component annotation is the main Stereotype Annotation. There are some Stereotype meta-annotations which is derived from @Component those are
 
-1 **@Service:** We specify a class with @Service to indicate that they’re holding the business logic. Besides being used in the service layer, there isn’t any other special use for this annotation. The utility classes can be marked as Service classes.
+1 **@Service:** 
+- We specify a class with @Service to indicate that they’re holding the business logic. 
+- Besides being used in the service layer, there isn’t any other special use for this annotation. 
+- The utility classes can be marked as Service classes.
+- You can use @Service over @Component in service-layer classes as it specifies intent in a better way.
 
-2 **@Repository:** We specify a class with @Repository to indicate that they’re dealing with CRUD operations, usually, it’s used with DAO (Data Access Object) or Repository implementations that deal with database tables.
+2 **@Repository:** 
+- We specify a class with @Repository to indicate that they’re dealing with CRUD operations, usually, it’s used with DAO (Data Access Object) or Repository implementations that deal with database tables.
 
-3: **@Controller:** We specify a class with @Controller to indicate that they’re front controllers and responsible to handle user requests and return the appropriate response. It is mostly used with REST Web Services.
+3: **@Controller:** 
+- We specify a class with @Controller to indicate that they’re front controllers and responsible to handle user requests and return the appropriate response. 
+- It is mostly used with REST Web Services.
+- This marks a class as a Spring Web MVC controller. 
+- Beans marked with it are automatically imported into the Dependency Injection container
 
