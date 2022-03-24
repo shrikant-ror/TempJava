@@ -1163,23 +1163,6 @@ public class Person {
 4) **constructor:** It injects the dependency by calling the constructor of the class. It has a large number of parameters.
 5) **autodetect:** First the container tries to wire using autowire by constructor, if it can’t then it tries to autowire by byType.
 
-## Explain the advantages of using Spring Boot for application development.
-- Spring Boot helps to create stand-alone applications which can be started using java.jar (Doesn’t require configuring WAR files).
-- Spring Boot also offers pinpointed ‘started’ POMs to Maven configuration.
-- Has provision to embed Undertow, Tomcat, Jetty, or other web servers directly.
-- Auto-Configuration: Provides a way to automatically configure an application based on the dependencies present on the classpath.
-- Spring Boot was developed with the intention of lessening the lines of code.
-- It offers production-ready support like monitoring and apps developed using spring boot are easier to launch
-
-## What are the features of Spring Boot?
-
-- **Spring Boot CLI** – This allows you to Groovy / Maven for writing Spring boot application and avoids boilerplate code.
-- **Starter Dependency** – With the help of this feature, Spring Boot aggregates common dependencies together and eventually improves productivity and reduces the burden on
-- **Spring Initializer** – This is a web application that helps a developer in creating an internal project structure. The developer does not have to manually set up the structure of the project while making use of this feature.
-- **Auto-Configuration** – This helps in loading the default configurations according to the project you are working on. In this way, unnecessary WAR files can be avoided.
-- **Spring Actuator** – Spring boot uses actuator to provide “Management EndPoints” which helps the developer in going through the Application Internals, Metrics etc.
-- **Logging and Security** – This ensures that all the applications made using Spring Boot are properly secured without any hassle.
-
 ## Spring ApplicationContext
 
 - Spring ApplicationContext is where Spring holds instances of objects that it has identified to be managed and distributed automatically. These are called beans.
@@ -1326,4 +1309,52 @@ And inside this XML file we'll have the following:
 - It also takes care of most of the common security vulnerabilities such as CSRF attacks.
 - To use Spring Security in web applications, we can get started with the simple annotation @EnableWebSecurity.
 
+## Explain the advantages of using Spring Boot for application development.
+- Spring Boot helps to create stand-alone applications which can be started using java.jar (Doesn’t require configuring WAR files).
+- Spring Boot also offers pinpointed ‘started’ POMs to Maven configuration.
+- Has provision to embed Undertow, Tomcat, Jetty, or other web servers directly.
+- Auto-Configuration: Provides a way to automatically configure an application based on the dependencies present on the classpath.
+- Spring Boot was developed with the intention of lessening the lines of code.
+- It offers production-ready support like monitoring and apps developed using spring boot are easier to launch
+ 
+## What are the Spring Boot key components?
+Below are the four key components of spring-boot:
+
+- Spring Boot auto-configuration.
+- Spring Boot CLI.
+- Spring Boot starter POMs.
+- Spring Boot Actuators.
+
+## Why Spring Boot over Spring?
+Below are some key points which spring boot offers but spring doesn’t:
+
+- Starter POM.
+- Version Management.
+- Auto Configuration.
+- Component Scanning.
+- Embedded server.
+- InMemory DB.
+- Actuators
+
+## What are the features of Spring Boot?
+
+- **Spring Boot CLI** – This allows you to Groovy / Maven for writing Spring boot application and avoids boilerplate code.
+- **Starter Dependency** – With the help of this feature, Spring Boot aggregates common dependencies together and eventually improves productivity and reduces the burden on
+- **Spring Initializer** – This is a web application that helps a developer in creating an internal project structure. The developer does not have to manually set up the structure of the project while making use of this feature.
+- **Auto-Configuration** – This helps in loading the default configurations according to the project you are working on. In this way, unnecessary WAR files can be avoided.
+- **Spring Actuator** – Spring boot uses actuator to provide “Management EndPoints” which helps the developer in going through the Application Internals, Metrics etc.
+- **Logging and Security** – This ensures that all the applications made using Spring Boot are properly secured without any hassle.
+
+## Mention the possible sources of external configuration in spring boot.
+
+There is no doubt in the fact that Spring Boot allows the developers to run the same application in different environments. Well, this is done with the support it provides for external configuration. It uses environment variables, properties files, command-line arguments, YAML files, and system properties to mention the required configuration properties. Also, the @value annotation is used to gain access to the properties. So, the most possible sources of external configuration are as follows:
+
+- **Application Properties:** – By default, Spring Boot searches for the application properties file or its YAML file in the current directory, classpath root or config directory to load the properties.
+
+- **Command-line properties:** – Spring Boot provides command-line arguments and converts these arguments to properties. Then it adds them to the set of environment properties.
+
+- **Profile-specific properties:** –  These properties are loaded from the application-{profile}.properties file or its YAML file. This file resides in the same location as that of the non-specific property files and the{profile} placeholder refers to an active profile.
+
+## Can you explain what happens in the background when a Spring Boot Application is “Run as Java Application”?
+When a Spring Boot application is executed as “Run as Java application”, then it automatically launches up the tomcat server as soon as it sees, that you are developing a web application. 
 
