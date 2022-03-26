@@ -229,6 +229,14 @@ The sorted method is used to sort the stream.
 ```
 List names = Arrays.asList("Reflection","Collection","Stream");
 List result = names.stream().sorted().collect(Collectors.toList());
+
+// Sort object by attribute
+
+// Let user has age fileds and we need to sort users by its age
+
+List<User> sortedList = users.stream()
+			.sorted(Comparator.comparingInt(User::getAge))
+			.collect(Collectors.toList());
 ```
 **Terminal Operations:**
 - collect: 
