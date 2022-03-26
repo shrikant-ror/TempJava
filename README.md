@@ -681,6 +681,43 @@ Following are a few of the reasons to use custom exceptions:
 To catch and provide specific treatment to a subset of existing Java exceptions.
 Business logic exceptions: These are the exceptions related to business logic and workflow. It is useful for the application users or the developers to understand the exact problem.
 
+## What is Java Executor Framework
+
+With the increase in the number of cores available in the processors nowadays, coupled with the ever-increasing need to achieve more throughput, multi-threading APIs are getting quite popular. Java provides its own multi-threading framework called the Java Executor Framework.
+
+Java executor framework (java.util.concurrent.Executor) is used to run the Runnable objects without creating new threads every time and mostly re-using the already created threads. 
+
+The java.util.concurrent.Executors provide factory methods that are being used to create ThreadPools of worker threads. Thread pools overcome this issue by keeping the threads alive and reusing the threads. Any excess tasks flowing in that the threads in the pool can handle are held in a Queue. Once any of the threads get free, they pick up the next task from this queue. This task queue is essentially unbounded for the out-of-box executors provided by the JDK.
+
+Some types of Java Executors are listed below
+
+**Executor 1: SingleThreadExecutor**
+
+A single thread pool can be obtained by calling the static newSingleThreadExecutor() method of the Executors class. It is used to execute tasks sequentially.
+```
+ExecutorService executor = Executors.newSingleThreadExecutor();
+```
+**Executor 2: FixedThreadPool(n)**
+
+As the name indicates, it is a thread pool of a fixed number of threads. The tasks submitted to the executor are executed by the n threads and if there is more task they are stored on a LinkedBlockingQueue. It uses Blocking Queue.
+```
+ExecutorService fixedPool = Executors.newFixedThreadPool(2);
+```
+
+**Executor 3: CachedThreadPool**
+
+Creates a thread pool that creates new threads as needed, but will reuse previously constructed threads when they are available. Calls to execute will reuse previously constructed threads if available. If no existing thread is available, a new thread will be created and added to the pool. It uses a SynchronousQueue queue.
+```
+ExecutorService executorService = Executors.newCachedThreadPool();
+```
+
+**Executor 4: ScheduledExecutor**
+
+Scheduled executors are based on the interface ScheduledExecutorService which extends the ExecutorService interface. This executor is used when we have a task that needs to be run at regular intervals or if we wish to delay a certain task.
+```
+ScheduledExecutorService scheduledExecService = Executors.newScheduledThreadPool(1);
+```
+
 ## Design patterns:
 
 A design pattern provides a general reusable solution for the common problems that occur in software design. 
