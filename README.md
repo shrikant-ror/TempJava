@@ -1359,14 +1359,16 @@ There is no doubt in the fact that Spring Boot allows the developers to run the 
 When a Spring Boot application is executed as “Run as Java application”, then it automatically launches up the tomcat server as soon as it sees, that you are developing a web application. 
 
 ## What is the starter dependency of the Spring boot module?
-Spring boot provides numbers of starter dependency, here are the most commonly used -
 
-- Data JPA starter.
-- Test Starter.
-- Security starter.
-- Web starter.
-- Mail starter.
-- Thymeleaf starter
+Spring Boot starters are a set of convenient dependency management providers that can be used in the application to enable dependencies. These starters, make development easy and rapid. All the available starters come under the `org.springframework.boot` group. Few of the popular starters are as follows:
+
+- **spring-boot-starter:** This is the core starter and includes logging, auto-configuration support, and YAML.
+- **spring-boot-starter-jdbc:** This starter is used for HikariCP connection pool with JDBC
+- **spring-boot-starter-web:** Is the starter for building web applications, including RESTful, applications using Spring MVC
+- **spring-boot-starter-data-jpa:** Is the starter to use Spring Data JPA with Hibernate
+- **spring-boot-starter-security:**  Is the starter used for Spring Security
+- **spring-boot-starter-aop:** This starter is used for aspect-oriented programming with AspectJ and  Spring AOP
+- **spring-boot-starter-test:** Is the starter for testing Spring Boot applications
 
 ## How does Spring Boot works?
 Spring Boot automatically configures your application based on the dependencies you have added to the project by using annotation. The entry point of the spring boot application is the class that contains @SpringBootApplication annotation and the main method.
@@ -1458,6 +1460,8 @@ To make this easy and clean, Spring has the provision of Profiles to keep the se
 ## What is Spring Actuator? What are its advantages?
 An actuator is an additional feature of Spring that helps you to monitor and manage your application when you push it to production. These actuators include auditing, health, CPU usage, HTTP hits, and metric gathering, and many more that are automatically applied to your application.
 
+Spring Actuator is a cool feature of Spring Boot with the help of which you can see what is happening inside a running application. So, whenever you want to debug your application, and need to analyze the logs you need to understand what is happening in the application right? In such a scenario, the Spring Actuator provides easy access to features such as identifying beans, CPU usage, etc. The Spring Actuator provides a very easy way to access the production-ready REST points and fetch all kinds of information from the web. These points are secured using Spring Security’s content negotiation strategy.
+
 ## How to enable Actuator in Spring boot application?
 To enable the spring actuator feature, we need to add the dependency of “spring-boot-starter-actuator” in pom.xml.
 
@@ -1467,4 +1471,130 @@ To enable the spring actuator feature, we need to add the dependency of “sprin
 <artifactId> spring-boot-starter-actuator </artifactId>
 </dependency>
 ```
+
+## Explain what is thymeleaf and how to use thymeleaf?
+
+Thymeleaf is a server-side Java template engine used for web applications. It aims to bring natural template for your web application and can integrate well with Spring Framework and HTML5 Java web applications. To use Thymeleaf, you need to add the following code in the pom.xml file:
+
+```
+<dependency>    
+<groupId>org.springframework.boot</groupId>    
+<artifactId>spring-boot-starter-thymeleaf</artifactId>    
+</dependency>
+```
+## What is the need for Spring Boot DevTools?
+Spring Boot Dev Tools are an elaborated set of tools and aims to make the process of developing an application easier. If the application runs in the production, then this module is automatically disabled, repackaging of archives are also excluded by default. So, the Spring Boot Developer Tools applies properties to the respective development environments.  To include the DevTools, you just have to add the following dependency into the pom.xml file:
+
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+</dependency>
+```
+
+## Mention the steps to connect Spring Boot application to a database using JDBC
+
+Spring Boot starter projects provide the required libraries to connect the application with JDBC. So, for example, if you just have to create an application  and connect it with MySQL database, you can follow the below steps:
+
+**Step 1:** Create a database in MySQL
+```
+CREATE DATABASE example;
+```
+
+**Step 2:** Then you have to create a table inside this database.
+```
+CREATE TABLE customers(customerid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, customername VARCHAR(255));  
+```
+
+**Step 3:** Now, create a Spring Boot project and provide the required details
+
+**Step 4:** Add the JDBC, MySQL and web dependencies.
+```
+// MYSQL
+<dependency>
+	<groupId>mysql</groupId>
+	<artifactId>mysql-connector-java</artifactId>
+	<scope>runtime</scope>
+</dependency>
+// JPA
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+// WEB
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+
+**Step 5:** Once the project is created, you have to configure the database into application properties
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/example
+spring.datasource.username=root  
+spring.datasource.password=edureka  
+spring.jpa.hibernate.ddl-auto=create-drop
+```
+
+## differences between JPA and Hibernate
+
+- JPA is a Data Access Abstraction used to reduce the amount of boilerplate code
+- Hibernate is an implementation of Java Persistence API and offers benefits of loose coupling
+
+## How can we create a custom endpoint in Spring Boot Actuator?
+
+To create a custom endpoint in Spring Boot 2.x, you can use the @Endpoint annotation. Spring Boot also exposes endpoints using @WebEndpointor, @WebEndpointExtension over HTTP with the help of Spring MVC, Jersey, etc.
+
+## Explain Spring Data.
+
+Spring Data aims to make it easy for the developers to use relational and non-relational databases, cloud-based data services, and other data access technologies. So, basically, it makes it easy for data access and still retains the underlying data.
+
+## What do you understand by auto-configuration in Spring Boot and how to disable the auto-configuration?
+
+Auto-configuration is used to automatically configure the required configuration for the application. For example, if you have a data source bean present in the classpath of the application, then it automatically configures the JDBC template. With the help of auto-configuration, you can create a Java application in an easy way, as it automatically configures the required beans, controllers, etc. 
+
+To disable the auto-configuration property, you have to exclude attribute of @EnableAutoConfiguration, in the scenario where you do not want it to be applied.
+```
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+```
+
+If the class is not on the classpath, then to exclude the auto-configuration, you have to mention the following code:
+```
+@EnableAutoConfiguration(excludeName={Sample.class})
+```
+
+Apart from this, Spring Boot also provides the facility to exclude list of auto-configuration classes by using the `spring.autoconfigure.exclude` property. You can go forward, and add it either in the application.properties or add multiple classes with comma-separated.
+
+## What are the steps to deploy Spring Boot web applications as JAR and WAR files?
+
+To deploy a Spring Boot web application, you just have to add the following plugin in the pom.xml file:
+```
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+</plugin>
+```
+By using the above plugin, you will get a JAR executing the package phase. This JAR will contain all the necessary libraries and dependencies required. It will also contain an embedded server. So, you can basically run the application like an ordinary JAR file.
+
+The packaging element in the pom.xml file must be set to jar to build a JAR file as below:
+```
+<packaging>jar</packaging>
+```
+Similarly, if you want to build a WAR file, then you will mention
+```
+<packaging>war</packaging>
+```
+
+## How is Hibernate chosen as the default implementation for JPA without any configuration?
+When we use the Spring Boot Auto Configuration, automatically the spring-boot-starter-data-jpa dependency gets added to the pom.xml file. Now, since this dependency has a transitive dependency on JPA and Hibernate, Spring Boot automatically auto-configures Hibernate as the default implementation for JPA, whenever it sees Hibernate in the classpath. 
+
+## In which layer, should the boundary of a transaction start?
+The boundary of the transaction should start from the Service Layer since the logic for the business transaction is present in this layer itself.
+
+## Explain how to register a custom auto-configuration.
+In order to register an auto-configuration class, you have to mention the fully-qualified name under the @EnableAutoConfiguration key META-INF/spring. factories file. Also, if we build the with maven, then this file should be placed in the resources/META-INT directory. 
+
+## Why is Spring Data REST not recommended in real-world applications?
+Spring Data REST is not recommended in real-world applications as you are exposing your database entities directly as REST Services. While designing RESTful services, the two most important things that we consider is the domain model and the consumers. But, while using Spring Data REST, none of these parameters are considered. The entities are directly exposed. So, I would just say, you can use Spring Data REST, for the initial evolution of the project.
 
