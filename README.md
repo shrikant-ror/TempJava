@@ -1699,8 +1699,22 @@ Components for MS are
 ## Explain CDC.
 As the name implies, CDC (Consumer-Driven Contract) basically ensures service communication compatibility by establishing an agreement between consumers and service providers regarding the format of the data exchanged between them. An agreement like this is called a contract. Basically, it is a pattern used to develop Microservices so that they can be efficiently used by external systems.
 
+## Synchronous vs. asynchronous microservices communication patterns
 
+**Synchronous:**
 
+A synchronous microservice is one in which data moves to and from an endpoint of a service in a blocking interaction. A typical example of a synchronous data exchange is an HTTP request/response interaction, When a request is made to an endpoint under HTTP, the caller is locked in the interaction until a response is received.
 
+![image](https://user-images.githubusercontent.com/2870964/160233314-7065fb1c-cffe-4e5a-ab08-33d6851368cd.png)
+
+The caller might receive the response in a mere millisecond or in a few seconds. Regardless of the application latency, the caller cannot move forward to the next task until the response is received. REST is a good example of a synchronous microservice.
+
+**Asynchronous:**
+
+An asynchronous microservice is one in which a request to a service and the subsequent response occur independently from each other. The general practice for implementing an asynchronous microservice is to use a message broker technology, such as Kafka or RabbitMQ, to act as a go-between for services, One service will publish a message to another service using the message broker.
+
+![image](https://user-images.githubusercontent.com/2870964/160233358-acb3e69b-f863-4fc0-b525-4b194903c0af.png)
+
+The intended service receives the message in its own time. The sending service is not locked to the broker. It simply fires and forgets.
 
 
