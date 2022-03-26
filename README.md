@@ -655,6 +655,22 @@ The Volatile keyword is used to mark the JVM and thread to read its value from p
 
 The Transient keyword is used with the instance variable to eliminate it from the serialization process. During serialization, the value of the transient field or variable is not saved.
 
+## Comparable vs Comparator
+Java provides two interfaces to sort objects using data members of the class: 
+
+- Comparable
+- Comparator
+
+| Comparable | Comparator |
+| ------ | ------ |
+| Comparable provides a single sorting sequence. In other words, we can sort the collection on the basis of a single element such as id, name, and price. | The Comparator provides multiple sorting sequences. In other words, we can sort the collection on the basis of multiple elements such as id, name, and price etc. |
+| Comparable affects the original class, i.e., the actual class is modified. | Comparator doesn't affect the original class, i.e., the actual class is not modified. |
+| Comparable provides compareTo() method to sort elements. | Comparator provides compare() method to sort elements. |
+|  Comparable is present in java.lang package. | A Comparator is present in the java.util package. |
+| We can sort the list elements of Comparable type by Collections.sort(List) method. | We can sort the list elements of Comparator type by Collections.sort(List, Comparator) method.  |
+
+To summarize, if sorting of objects needs to be based on natural order then use Comparable whereas if you sorting needs to be done on attributes of different objects, then use Comparator in Java.
+
 
 ## What is a classloader in Java?
 
