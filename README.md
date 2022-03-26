@@ -702,6 +702,24 @@ Following are a few of the reasons to use custom exceptions:
 To catch and provide specific treatment to a subset of existing Java exceptions.
 Business logic exceptions: These are the exceptions related to business logic and workflow. It is useful for the application users or the developers to understand the exact problem.
 
+```
+public class BaseException extends RuntimeException{
+	private static final long serialVersionUID = -1165516792304036105L;
+    	private ErrorResponse error;
+	
+	/**
+     *
+     * @param errorCode
+     * @param errorMessage
+     * @param cause
+     */
+    public BaseException(int errorCode, String errorMessage, Throwable cause) {
+        super(errorMessage, cause);
+        this.error = new ErrorResponse(errorCode, errorMessage);
+    }
+}
+```
+
 ## What is Java Executor Framework
 
 With the increase in the number of cores available in the processors nowadays, coupled with the ever-increasing need to achieve more throughput, multi-threading APIs are getting quite popular. Java provides its own multi-threading framework called the Java Executor Framework.
@@ -741,12 +759,12 @@ ScheduledExecutorService scheduledExecService = Executors.newScheduledThreadPool
 
 ## Design patterns:
 
-A design pattern provides a general reusable solution for the common problems that occur in software design. 
-The pattern typically shows relationships and interactions between classes or objects. 
-The idea is to speed up the development process by providing well-tested, proven development/design paradigms. 
-Design patterns are programming language independent strategies for solving a common problem. 
-That means a design pattern represents an idea, not a particular implementation. 
-By using design patterns, you can make your code more flexible, reusable, and maintainable.
+- A design pattern provides a general reusable solution for the common problems that occur in software design. 
+- The pattern typically shows relationships and interactions between classes or objects. 
+- The idea is to speed up the development process by providing well-tested, proven development/design paradigms. 
+- Design patterns are programming language independent strategies for solving a common problem. 
+- That means a design pattern represents an idea, not a particular implementation. 
+- By using design patterns, you can make your code more flexible, reusable, and maintainable.
 
 ##### Types of Design Patterns
 1) Creational 
@@ -756,6 +774,14 @@ Creational design patterns are the Factory Method, Abstract Factory, Builder, Si
 2) Structural
 These design patterns are about organizing different classes and objects to form larger structures and provide new functionality. 
 Structural design patterns are Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Private Class Data, and Proxy. 
+
+- **Abstract Factory** is a creational design pattern that lets you produce families of related objects without specifying their concrete classes.
+- **Builder** is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.
+- **Prototype** is a creational design pattern that lets you copy existing objects without making your code dependent on their classes.
+- **Factory Method** is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
+- **Iterator** is a behavioral design pattern that lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.)
+- **Bridge** is a structural design pattern that lets you split a large class or a set of closely related classes into two separate hierarchies—abstraction and implementation—which can be developed independently of each other.
+
 
 ## Singleton Design Pattern
 
@@ -832,7 +858,6 @@ public class FactorialTask implements Callable<Integer> {
     }
 }
 ```
-
 ## How to create Immutable class in Java?
 
 Immutable class in java means that once an object is created, we cannot change its content. In Java, all the wrapper classes (like Integer, Boolean, Byte, Short) and String class is immutable. We can create our own immutable class as well. 
