@@ -671,6 +671,11 @@ Java provides two interfaces to sort objects using data members of the class:
 
 To summarize, if sorting of objects needs to be based on natural order then use Comparable whereas if you sorting needs to be done on attributes of different objects, then use Comparator in Java.
 
+## Difference between RestTemplate and Webclient
+
+RestTemplate uses Java Servlet API and is therefore synchronous and blocking.
+
+Conversely, WebClient is asynchronous and will not block the executing thread while waiting for the response to come back. The notification will be produced only when the response is ready.
 
 ## What is a classloader in Java?
 
@@ -1650,4 +1655,52 @@ In order to register an auto-configuration class, you have to mention the fully-
 
 ## Why is Spring Data REST not recommended in real-world applications?
 Spring Data REST is not recommended in real-world applications as you are exposing your database entities directly as REST Services. While designing RESTful services, the two most important things that we consider is the domain model and the consumers. But, while using Spring Data REST, none of these parameters are considered. The entities are directly exposed. So, I would just say, you can use Spring Data REST, for the initial evolution of the project.
+
+# Microservices
+
+## What do you mean by Microservice?
+
+Microservices, also known as Microservices Architecture, is basically an SDLC approach in which large applications are built as a collection of small functional modules. It is one of the most widely adopted architectural concepts within software development. In addition to helping in easy maintenance, this architecture also makes development faster. Additionally, microservices are also a big asset for the latest methods of software development such as DevOps and Agile. Furthermore, it helps deliver large, complex applications promptly, frequently, and reliably. Applications are modeled as collections of services, which are: 
+
+- Maintainable and testable
+- Loosely coupled
+- Independently deployable
+- Designed or organized around business capabilities
+- Managed by a small team
+
+![image](https://user-images.githubusercontent.com/2870964/160232465-12fa488b-c7f4-4116-a9c4-7296b035c1f0.png)
+
+ ## Features of Microservices.
+ 
+- **Decoupling:** Within a system, services are largely decoupled. The application as a whole can therefore be easily constructed, altered, and scalable
+- **Componentization:** Microservices are viewed as independent components that can easily be exchanged or upgraded
+- **Business Capabilities:** Microservices are relatively simple and only focus on one service
+- **Team autonomy:** Each developer works independently of each other, allowing for a faster project timeline
+- **Continuous Delivery:** Enables frequent software releases through systematic automation of software development, testing, and approval
+- **Responsibility:** Microservices are not focused on applications as projects. Rather, they see applications as products they are responsible for
+- **Decentralized Governance:** Choosing the right tool according to the job is the goal. Developers can choose the best tools to solve their problems
+- **Agility:** Microservices facilitate agile development. It is possible to create new features quickly and discard them again at any time.
+
+## Explain the working of Microservice Architecture
+
+Components for MS are
+
+- **Clients:** Different users send requests from various devices. 
+- **Identity Provider:** Validate a user's or client's identity and issue security tokens. 
+- **API Gateway:** Handles the requests from clients. 
+- **Static Content:** Contains all of the system's content. 
+- **Management:** Services are balanced on nodes and failures are identified. 
+- **Service Discovery:** A guide to discovering the routes of communication between microservices. 
+- **Content Delivery Network:** Includes distributed network of proxy servers and their data centers. 
+- **Remote Service:** Provides remote access to data or information that resides on networked computers and devices. 
+
+![image](https://user-images.githubusercontent.com/2870964/160232661-66732fb3-d825-4b76-9b29-908d91526d9f.png)
+
+## Explain CDC.
+As the name implies, CDC (Consumer-Driven Contract) basically ensures service communication compatibility by establishing an agreement between consumers and service providers regarding the format of the data exchanged between them. An agreement like this is called a contract. Basically, it is a pattern used to develop Microservices so that they can be efficiently used by external systems.
+
+
+
+
+
 
