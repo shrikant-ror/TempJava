@@ -727,6 +727,122 @@ public class BaseException extends RuntimeException{
     }
 }
 ```
+## What is Thread in Java?
+Threads are basically the lightweight and smallest unit of processing that can be managed independently by a scheduler. Threads are referred to as parts of a process that simply let a program execute efficiently with other parts or threads of the process at the same time. Using threads, one can perform complicated tasks in the easiest way. It is considered the simplest way to take advantage of multiple CPUs available in a machine. They share the common address space and are independent of each other. 
+
+## What is the difference between Process and Thread?
+A process is a self contained execution environment and it can be seen as a program or application whereas Thread is a single task of execution within the process. Java runtime environment runs as a single process which contains different classes and programs as processes. Thread can be called lightweight process. Thread requires less resources to create and exists in the process, thread shares the process resources.
+
+##  What are the benefits of using Multithreading?
+There are various benefits of multithreading as given below:
+
+- Allow the program to run continuously even if a part of it is blocked. 
+- Improve performance as compared to traditional parallel programs that use multiple processes. 
+- Allows to write effective programs that utilize maximum CPU time
+- Improves the responsiveness of complex applications or programs. 
+- Increase use of CPU resources and reduce costs of maintenance. 
+- Saves time and parallelism tasks. 
+- If an exception occurs in a single thread, it will not affect other threads as threads are independent. 
+- Less resource-intensive than executing multiple processes at the same time.
+
+## What are the two ways of implementing thread in Java?
+- Extending the **Thread** class
+```
+class MultithreadingDemo extends Thread 
+{   
+  public void run() 
+ {   
+     System.out.println("My thread is in running state.");    
+ } 
+  public static void main(String args[]) 
+ {   
+    MultithreadingDemo obj=new MultithreadingDemo();  
+        obj.start();  
+  }  
+}
+```
+- Implementing **Runnable** interface in Java
+```
+lass MultithreadingDemo implements Runnable 
+{  
+   public void run() 
+ {  
+      System.out.println("My thread is in running state.");  
+  }  
+    public static void main(String args[]) 
+ {  
+      MultithreadingDemo obj=new MultithreadingDemo();   
+      Threadtobj =new Thread(obj);       tobj.start();  
+ }   
+} 
+```
+
+## What’s the difference between class lock and object lock?
+
+**Class Lock:** In java, each and every class has a unique lock usually referred to as a class level lock. These locks are achieved using the keyword ‘static synchronized’ and can be used to make static data thread-safe. It is generally used when one wants to prevent multiple threads from entering a synchronized block. 
+```
+public class ClassLevelLockExample  
+{    
+  public void classLevelLockMethod()  
+ {       
+     synchronized (ClassLevelLockExample.class)  
+       {         
+            //DO your stuff here       
+       }    
+ } 
+}
+```
+
+**Object Lock:** In java, each and every object has a unique lock usually referred to as an object-level lock. These locks are achieved using the keyword ‘synchronized’ and can be used to protect non-static data. It is generally used when one wants to synchronize a non-static method or block so that only the thread will be able to execute the code block on a given instance of the class. 
+```
+public class ObjectLevelLockExample  
+{    
+  public void objectLevelLockMethod()  
+ {   
+     synchronized (this)  
+       {     
+            //DO your stuff here   
+       } 
+ }
+}
+```
+
+## What is difference between user Thread and daemon Thread?
+
+**User Thread (Non-Daemon Thread):** In Java, user threads have a specific life cycle and its life is independent of any other thread. JVM (Java Virtual Machine) waits for any of the user threads to complete its tasks before terminating it. When user threads are finished, JVM terminates the whole program along with associated daemon threads. 
+
+**Daemon Thread:** In Java, daemon threads are basically referred to as a service provider that provides services and support to user threads. There are basically two methods available in thread class for daemon thread: setDaemon() and isDaemon(). 
+
+## What are the wait() and sleep() methods?
+
+**wait():** As the name suggests, it is a non-static method that causes the current thread to wait and go to sleep until some other threads call the notify () or notifyAll() method for the object’s monitor (lock). It simply releases the lock and is mostly used for inter-thread communication. It is defined in the object class, and should only be called from a synchronized context. 
+```
+synchronized(monitor) 
+{ 
+monitor.wait();       Here Lock Is Released by Current Thread  
+} 
+```
+
+**sleep():* As the name suggests, it is a static method that pauses or stops the execution of the current thread for some specified period. It doesn’t release the lock while waiting and is mostly used to introduce pause on execution. It is defined in thread class, and no need to call from a synchronized context.  
+```
+synchronized(monitor) 
+{ 
+Thread.sleep(1000);     Here Lock Is Held by The Current Thread 
+//after 1000 milliseconds, the current thread will wake up, or after we call that is interrupt() method 
+}
+```
+
+## What’s the difference between notify() and notifyAll()?
+**notify():** It sends a notification and wakes up only a single thread instead of multiple threads that are waiting on the object’s monitor.
+**notifyAll():** It sends notifications and wakes up all threads and allows them to compete for the object's monitor instead of a single thread. 
+
+## What is the start() and run() method of Thread class?
+**start():** In simple words, the start() method is used to start or begin the execution of a newly created thread. When the start() method is called, a new thread is created and this newly created thread executes the task that is kept in the run() method. One can call the start() method only once.  
+
+**run():** In simple words, the run() method is used to start or begin the execution of the same thread. When the run() method is called, no new thread is created as in the case of the start() method. This method is executed by the current thread. One can call the run() method multiple times.
+
+## Explain thread pool?
+A Thread pool is simply a collection of pre-initialized or worker threads at the start-up that can be used to execute tasks and put back in the pool when completed. It is referred to as pool threads in which a group of fixed-size threads is created.  By reducing the number of application threads and managing their lifecycle, one can mitigate the issue of performance using a thread pool. Using threads, performance can be enhanced and better system stability can occur. To create the thread pools, java.util.concurrent.Executors class usually provides factory methods.
 
 ## What is Java Executor Framework
 
