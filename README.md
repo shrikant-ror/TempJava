@@ -1866,4 +1866,25 @@ An asynchronous microservice is one in which a request to a service and the subs
 
 The intended service receives the message in its own time. The sending service is not locked to the broker. It simply fires and forgets.
 
+# DB
 
+## What do you know about stored procedures?
+The group of SQL statements which are or have been stored in the server database is known as a stored procedure. Input parameters are accepted in the stored procedures so that several clients can use that single procedure over the network using that single input data. It holds an advantage that whenever the procedure gets updated; all the clients automatically get the updated version. Stored procedures help in reducing the network traffic and also improve the performance of the data. The integrity of data can be ensured while making use of stored procedures
+
+Stored procedures are used for various different things. Some of the uses of stored procedures are as follows:
+
+- Stored procedures are often used as access control mechanism and for data validation.
+- The logic applied in this application is centralized and is stored in the application.
+- Procedures are used to process the huge amount of data for complex procedures and functionalities and for logic implementation access of their data.
+- These procedures are used to store data in them and can be accessed by procedures.
+- They support modular programming.
+- Faster execution takes place.
+- It can also be used as a security mechanism.
+- They are used for reducing network traffic.
+
+## differences between stored procedure and view in SQL
+- A stored procedure accepts parameters. Whereas, views do not accept parameters.
+- In any large query, a stored procedure cannot be used as a building block. Whereas, a view can be used as a building block.
+- A stored procedure can contain several statements. Whereas, a view can contain only one single select query.
+- Using stored procedures, one or more tables can be modified. Whereas, using view no table can be modified.
+- A view can be used within a stored procedure. Whereas, a stored procedure cannot be used inside a view.
